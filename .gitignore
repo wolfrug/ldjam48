@@ -2,13 +2,14 @@
 #
 # Get latest from https://github.com/github/gitignore/blob/master/Unity.gitignore
 #
-/[Ll]ibrary/
-/[Tt]emp/
-/[Oo]bj/
-/[Bb]uild/
-/[Bb]uilds/
-/[Ll]ogs/
-/[Mm]emoryCaptures/
+/LDJam48/[Ll]ibrary/
+/LDJam48/[Tt]emp/
+/LDJam48/[Oo]bj/
+/LDJam48/[Bb]uild/
+/LDJam48/[Bb]uilds/
+/LDJam48/[Ll]ogs/
+/LDJam48/[Mm]emoryCaptures/
+/LDJam48/[Rr]ecordings/
 
 # Asset meta data should only be ignored when the corresponding asset is also ignored
 !/[Aa]ssets/**/*.meta
@@ -42,6 +43,9 @@ ExportedObj/
 *.mdb
 *.opendb
 *.VC.db
+*.zip
+*.rar
+*.7z
 
 # Unity3D generated meta files
 *.pidb.meta

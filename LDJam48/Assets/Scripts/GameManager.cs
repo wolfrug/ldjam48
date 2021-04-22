@@ -30,6 +30,7 @@ public class GameState {
 
 public class GameManager : MonoBehaviour {
     public static GameManager instance;
+    public bool initOnStart = true;
     [NaughtyAttributes.ReorderableList]
     public GameState[] gameStates;
     [SerializeField]
@@ -51,36 +52,41 @@ public class GameManager : MonoBehaviour {
         }
     }
     void Start () {
-        //Init() // uncomment if not going via mainmenu
+        if (initOnStart) {
+            Init (); // uncomment if not going via mainmenu
+        };
         //AudioManager.instance.PlayMusic ("MusicBG");
     }
 
     [NaughtyAttributes.Button]
     public void Init () {
         SetState (GameStates.INIT);
-        Invoke ("FixTerribleBug", 1f);
+        //Invoke ("FixTerribleBug", 1f);
         //NextState ();
     }
 
     void FixTerribleBug () {
-        InkWriter.main.StartStory ();
+        //InkWriter.main.StartStory ();
     }
 
     void Late_Init () {
-        if (currentState.state == GameStates.LATE_INIT) {
-            Debug.Log ("Late initialization");
-            currentState.evtStart.Invoke (currentState);
-        };
+        currentState = gameStateDict[GameStates.LATE_INIT];
+        Debug.Log ("Invoking late init");
+        currentState.evtStart.Invoke (currentState);
+        if (currentState.nextState != GameStates.NONE) {
+            NextState ();
+        }
     }
     public void NextState () {
         if (currentState.nextState != GameStates.NONE) {
-            currentState = gameStateDict[currentState.nextState];
-            if (currentState.state == GameStates.LATE_INIT) { // late init inits a bit late and only works thru nextstate
+            if (gameStateDict[currentState.state].nextState == GameStates.LATE_INIT) { // late init inits a bit late and only works thru nextstate
                 Invoke ("Late_Init", lateInitWait);
+                Debug.Log ("Invoking late init");
                 return;
-            }
-            gameStateDict[currentState.state].evtStart.Invoke (currentState);
-            Debug.Log ("Changed states to " + currentState.state);
+            } else {
+                Debug.Log ("Invoking Next State " + "(" + gameStateDict[currentState.state].nextState.ToString () + ")");
+                SetState (gameStateDict[currentState.state].nextState);
+            };
         }
     }
     public void SetState (GameStates state) {
@@ -101,7 +107,7 @@ public class GameManager : MonoBehaviour {
             currentState = gameStateDict[value];
             currentState.evtStart.Invoke (currentState);
             if (currentState.nextState != GameStates.NONE) {
-                SetState (currentState.nextState);
+                NextState ();
             };
         }
     }
@@ -173,6 +179,7 @@ public class GameManager : MonoBehaviour {
 
     }
     public void InitDoozy () {
+        Debug.Log ("Starting Doozy");
         Doozy.Engine.GameEventMessage.SendEvent ("InitDoozy");
     }
     void OpenInventory (InventoryController otherInventory) {
@@ -211,7 +218,9 @@ public class GameManager : MonoBehaviour {
         }
     }
     public void OpenCraftingInventory () {
-        if (GameState != GameStates.GAME) {
+        if (GameState == GameStates.INVENTORY) {
+            InventoryController.GetInventoryOfType (InventoryType.CRAFTING, null, false).Visible = true;
+        } else if (GameState != GameStates.GAME) {
             return;
         } else {
             InventoryController.GetInventoryOfType (InventoryType.CRAFTING, null, false).Visible = true;

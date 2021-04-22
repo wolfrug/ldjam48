@@ -30,6 +30,7 @@ public class Inventory_ConsumeWatcher : MonoBehaviour {
     public bool destroyBoxOnFinish = true;
     public EngineStarted engineStartedEvent;
     public EngineStopped engineStoppedEvent;
+    public EngineStopped engineFailedToStartEvent;
     public EngineRunning engineRunningEvent;
     public EngineFuelUnitDone engineFuelUnitDoneEvent;
     private bool m_active;
@@ -60,6 +61,7 @@ public class Inventory_ConsumeWatcher : MonoBehaviour {
                     engineLoop = StartCoroutine (MainLoop ());
                 } else { // cannot activate on empty fuel :(
                     m_active = false;
+                    engineFailedToStartEvent.Invoke (this);
                 }
             } else if (engineLoop != null && !value) {
                 ResetFuelDraggable ();

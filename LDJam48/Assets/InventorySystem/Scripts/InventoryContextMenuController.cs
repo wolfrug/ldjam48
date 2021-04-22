@@ -24,7 +24,7 @@ public class InventoryContextMenuController : MonoBehaviour {
         // Populate context menu and show....stuff
         Debug.Log ("Selected item: " + selectedItem);
         List<ContextMenuEntryType> addedEntries = new List<ContextMenuEntryType> { };
-        if (selectedItem.data.HasTrait (ItemTrait.DRAGGABLE)) { // Can be dragged, therefore can be moved around
+        if (selectedItem.draggable) { // Can be dragged, therefore can be moved around
             // Are there any inventories (not the parent) that accept the item in question? If so, add 'drop'.
             targetInventory = InventoryController.GetPermittedInventoryForType (parentController.type, parentController);
             if (targetInventory != null) {
@@ -35,7 +35,7 @@ public class InventoryContextMenuController : MonoBehaviour {
                 };
             }
         }
-        if (selectedItem.data.HasTrait (ItemTrait.CONSUMABLE)) { // Can be consumed -> add 'use'
+        if (selectedItem.consumable) { // Can be consumed -> add 'use'
             if (onlyUseInPlayerInventory && parentController.type == InventoryType.PLAYER) {
                 addedEntries.Add (ContextMenuEntryType.UI_USE);
             } else if (!onlyUseInPlayerInventory) {
@@ -48,7 +48,7 @@ public class InventoryContextMenuController : MonoBehaviour {
     public void ForceSelectOption (ContextMenuEntryType actionType, UI_ItemBox selectedItem) {
         // DO this if we try to double-click for example on one or the other side
         if (actionType == ContextMenuEntryType.UI_DROP || actionType == ContextMenuEntryType.UI_TAKE) {
-            if (selectedItem.data.HasTrait (ItemTrait.DRAGGABLE)) { // Can be dragged, therefore can be moved around
+            if (selectedItem.draggable) { // Can be dragged, therefore can be moved around
                 // Are there any inventories (not the parent) that accept the item in question? If so, add 'drop'.
                 targetInventory = InventoryController.GetPermittedInventoryForType (parentController.type, parentController);
                 if (targetInventory != null) {
@@ -56,6 +56,10 @@ public class InventoryContextMenuController : MonoBehaviour {
                 }
             }
         }
+    }
+
+    public void Cancel () {
+        contextMenu.ShowMenu (false);
     }
 
     public void SelectOption (ContextMenuEntryType actionType, GameObject target) {

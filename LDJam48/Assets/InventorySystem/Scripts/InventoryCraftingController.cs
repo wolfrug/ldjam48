@@ -15,7 +15,9 @@ public class InventoryCraftingController : MonoBehaviour {
     public Button craftButton;
 
     public UI_ItemBox exampleResult;
+    public UI_ItemBox[] displayInventory;
     public bool startOff = true;
+    public bool returnAllItemsOnClose = true;
     private bool m_active;
     private bool m_checkingActive = true;
 
@@ -24,8 +26,9 @@ public class InventoryCraftingController : MonoBehaviour {
     private static List<ItemBlueprintData> allBlueprintDatas = new List<ItemBlueprintData> { };
     private Dictionary<ItemBlueprintType, List<ItemBlueprintData>> blueprintLookupDict = new Dictionary<ItemBlueprintType, List<ItemBlueprintData>> { };
     public List<ItemBlueprintData> craftableBlueprints = new List<ItemBlueprintData> { };
-
     public ItemCrafted itemCraftedEvent;
+
+    private Dictionary<Item_DragAndDrop, InventoryController> allAddedItems = new Dictionary<Item_DragAndDrop, InventoryController> { };
 
     void Awake () {
         LoadAllBlueprintDatas ();
@@ -39,6 +42,10 @@ public class InventoryCraftingController : MonoBehaviour {
     }
     // Start is called before the first frame update
     void Start () {
+
+    }
+
+    public void Init () {
         if (startOff) {
             Active = false;
         } else {
@@ -47,10 +54,13 @@ public class InventoryCraftingController : MonoBehaviour {
         }
 
         parentController.itemAddedEvent.AddListener (CheckCraftability);
-        parentController.itemRemovedEvent.AddListener (CheckCraftability);
+        parentController.itemRemovedEvent.AddListener (RemovedItem);
 
         craftButton.onClick.AddListener (Craft);
         CheckCraftability (null, null);
+
+        // Init-clear the display boxes
+        ClearAllComponents ();
     }
 
     [NaughtyAttributes.Button]
@@ -61,7 +71,7 @@ public class InventoryCraftingController : MonoBehaviour {
 
     public void CheckCraftability (InventoryController controller, Item_DragAndDrop item) { // Checks if it's possible to make anything!
         if (Active && UpdateCraftability) {
-          //  Debug.Log ("Item has been moved to crafting parent controller " + parentController.name);
+            Debug.Log ("Item has been moved to crafting parent controller " + parentController.name);
             foreach (ItemBlueprintData data in craftableBlueprints) {
                 Debug.Log ("Can craft: " + data.m_id + " = " + CanCraft (data));
                 if (CanCraft (data)) {
@@ -73,8 +83,22 @@ public class InventoryCraftingController : MonoBehaviour {
             }
         }
         SetCraftingButtonActive (false);
-        CreateExampleCopy (null, -1);
+        //CreateExampleCopy (null, -1);
         targetBlueprint = null;
+    }
+    public void RemovedItem (InventoryController controller, Item_DragAndDrop item) {
+        if (Active && UpdateCraftability) {
+            RemoveComponentFromDisplay (item.targetBox.data);
+        }
+    }
+
+    void ReturnItemToPlayerInventory (Item_DragAndDrop item) {
+        // Super ugly stuff incoming
+        if (GameManager.instance != null) {
+            if (item != null && GameManager.instance.PlayerInventory != null) {
+                GameManager.instance.PlayerInventory.TryTakeItemFromInventory (item, null);
+            };
+        };
     }
 
     void CreateExampleCopy (ItemData example, int amount) {
@@ -87,20 +111,53 @@ public class InventoryCraftingController : MonoBehaviour {
         }
     }
 
+    void AddComponentToDisplay (ItemData show, int amount, int index) {
+        if (index >= displayInventory.Length) {
+            Debug.LogWarning ("Blueprint longer than three items not supported!");
+            return;
+        }
+        if (show == null) {
+            displayInventory[index].gameObject.SetActive (false);
+        } else {
+            displayInventory[index].gameObject.SetActive (true);
+            displayInventory[index].SetItemBoxData (show);
+            displayInventory[index].StackSize = amount;
+        }
+    }
+
+    void RemoveComponentFromDisplay (ItemData component) {
+        foreach (UI_ItemBox box in displayInventory) {
+            if (box.data == component) {
+                box.SetItemBoxData (null);
+                box.gameObject.SetActive (false);
+                return;
+            }
+        }
+    }
+    void ClearAllComponents () {
+        foreach (UI_ItemBox box in displayInventory) {
+            box.SetItemBoxData (null);
+            box.gameObject.SetActive (false);
+        }
+    }
+
     public bool CanCraft (ItemBlueprintData data) {
         List<int> results = new List<int> { };
         // make a list of required results
+        int index = 0;
         foreach (BlueprintComponent component in data.m_componentsNeeded) {
             int itemCount = parentController.CountItem (component.data);
             if (itemCount > 0) {
                 if (itemCount >= component.amount) {
                     results.Add (1);
+                    AddComponentToDisplay (component.data, component.amount, index);
                 } else {
                     results.Add (0);
                 }
             } else {
                 results.Add (0);
             }
+            index++;
         }
         return !results.Contains (0);
     }
@@ -119,15 +176,24 @@ public class InventoryCraftingController : MonoBehaviour {
             success = parentController.DestroyItemAmount (component.data, component.amount);
         }
         if (success) {
+            ClearAllItemsFromInventory ();
             success = parentController.AddItem (data.m_result, data.m_stackAmount);
             Debug.Log ("<color=green> Successfully crafted " + data.m_result.m_id + "</color>");
             itemCraftedEvent.Invoke (parentController, data);
+            ShowResultsPanel (true);
         }
         if (!success) {
             Debug.LogWarning ("<color=red>Failed to craft an object!</color>");
         }
         yield return null;
         crafting = null;
+    }
+    public void ShowResultsPanel (bool show) {
+        if (show) {
+            //GetComponent<Animator> ().SetTrigger ("showResult");
+        } else {
+            //GetComponent<Animator> ().SetTrigger ("hideResult");
+        }
     }
     public bool Active {
         get {
@@ -137,6 +203,13 @@ public class InventoryCraftingController : MonoBehaviour {
             m_active = value;
             UpdateCraftability = value;
             SetVisible ();
+            if (returnAllItemsOnClose && !value) { // we also do this on start, just in case
+                ClearAllItemsFromInventory ();
+            }
+            ClearAllComponents ();
+            if (!value) {
+                ShowResultsPanel (false);
+            }
         }
     }
 
@@ -151,6 +224,16 @@ public class InventoryCraftingController : MonoBehaviour {
 
     void SetCraftingButtonActive (bool active) {
         craftButton.interactable = active;
+    }
+
+    void ClearAllItemsFromInventory () {
+        List<Item_DragAndDrop> copyList = new List<Item_DragAndDrop> { };
+        foreach (Item_DragAndDrop item in parentController.allItemBoxes) {
+            copyList.Add (item);
+        }
+        foreach (Item_DragAndDrop item in copyList) {
+            ReturnItemToPlayerInventory (item);
+        }
     }
 
     public List<ItemBlueprintData> AllowedBlueprints () {
@@ -173,6 +256,10 @@ public class InventoryCraftingController : MonoBehaviour {
         canvasGroup.interactable = Active;
         canvasGroup.blocksRaycasts = Active;
         canvasGroup.alpha = Active ? 1f : 0f;
+        // Null the displays..
+        foreach (UI_ItemBox box in displayInventory) {
+            box.SetItemBoxData (null);
+        }
     }
 
     void LoadAllBlueprintDatas () {

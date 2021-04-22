@@ -47,7 +47,7 @@ public class Inventory_StackManipulator : MonoBehaviour {
     public void StartManipulator (Item_DragAndDrop targetBox, Item_DragAndDrop othercombinerItem) {
         currentItem = targetBox;
         combinerItem = othercombinerItem;
-        if (CheckCompatibility ()) {
+        if (CheckCompatibility (currentItem)) {
             if (currentItem.targetBox.StackSize == 1 && combinerItem != null) { // dropping a 1 always auto-combines
                 slider.value = 1;
                 StopManipulator ();
@@ -68,12 +68,12 @@ public class Inventory_StackManipulator : MonoBehaviour {
         };
     }
 
-    bool CheckCompatibility () { // check here stuff like "cannot stack" etc
-        if (!currentItem.targetBox.data.HasTrait (ItemTrait.STACKABLE)) { // main is not stackable -> return false
+    public bool CheckCompatibility (Item_DragAndDrop item) { // check here stuff like "cannot stack" etc
+        if (!item.targetBox.data.HasTrait (ItemTrait.STACKABLE)) { // main is not stackable -> return false
             return false;
         }
         if (combinerItem == null) { // trying to split
-            if (!currentItem.targetBox.data.HasTrait (ItemTrait.SPLITTABLE)) { // main is not splittable -> return false
+            if (!item.targetBox.data.HasTrait (ItemTrait.SPLITTABLE)) { // main is not splittable -> return false
                 return false;
             }
         }

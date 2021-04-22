@@ -25,6 +25,7 @@ public class BasicAgent : MonoBehaviour {
 
     public void StartWalk () {
         animator.SetFloat ("speed", 1f);
+        animator.SetBool ("flipped", navMeshAgent.velocity.x < 0f); // if velocity x is < 0, flip the animation (for 2D stuff)
     }
     public void StopWalk () {
         animator.SetFloat ("speed", 0f);

@@ -5,6 +5,7 @@ using UnityEngine.EventSystems;
 // Unuse this if you're not using TextMeshPro for some reason
 using TMPro;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 [System.Serializable]
 public class TooltipActivated : UnityEvent<GenericTooltip, bool> { }
@@ -22,19 +23,20 @@ public class GenericTooltip : MonoBehaviour, IPointerExitHandler, IPointerEnterH
     // You can use a camera instead of Screen.height and Screen.width for the max if you want.
     // Uncomment this + the definition line in start + change the max in Update.
     //public Camera cam;
+    public string tooltipImageName = "Image";
     public Transform tooltipCanvasParent;
     public GameObject tooltipPrefab;
     [Tooltip ("This is where the actual spawned tooltip object lives and is 'cached' between uses but you can also add an object here directly.")]
     public GameObject spawnedTooltip;
-
+    private Transform targetMoveTransform;
     public TooltipActivated tooltipOpenedEvent;
     public TooltipActivated tooltipClosedEvent;
-
+    public bool destroySelfAutomatically = true;
     Vector3 min, max;
     private RectTransform rect;
     private EventTrigger eventTrigger;
     [Tooltip ("Y-offset from parent object; make negative for UI elements that are at the bottom of the screen!")]
-    public float y_offset = 15f;
+    public Vector2 offset = new Vector2 (0f, 15f);
     private Camera cam;
 
     // Start is called before the first frame update
@@ -50,9 +52,21 @@ public class GenericTooltip : MonoBehaviour, IPointerExitHandler, IPointerEnterH
         if (spawnedTooltip == null) {
             if (tooltipPrefab != null) {
                 spawnedTooltip = Instantiate (tooltipPrefab, tooltipCanvasParent.transform, false);
+                // Are we a canvas? If so, set us to SUPER HIGH and fuck being parented
+                Canvas getCanvas = spawnedTooltip.GetComponent<Canvas> ();
+                if (getCanvas != null) {
+                    getCanvas.sortingOrder = 99;
+                    spawnedTooltip.transform.SetParent (null);
+                    spawnedTooltip.transform.position = Vector3.zero;
+                    spawnedTooltip.transform.localScale = new Vector3 (1f, 1f, 1f);
+                    //spawnedTooltip.transform.SetParent (tooltipCanvasParent.transform, true);
+                    targetMoveTransform = spawnedTooltip.transform.GetChild (0);
+                } else {
+                    targetMoveTransform = spawnedTooltip.transform;
+                }
                 // Set the spawned tooltip at zero!
                 if (moveToMousePosition) {
-                    spawnedTooltip.transform.localPosition = Vector3.zero;
+                    targetMoveTransform.localPosition = Vector3.zero;
                 };
             } else {
                 Debug.LogError ("No prefab or pre-made tooltip object assigned for " + name + "!", gameObject);
@@ -103,11 +117,19 @@ public class GenericTooltip : MonoBehaviour, IPointerExitHandler, IPointerEnterH
             Debug.LogWarning ("Could not find text mesh pro ugui component at path " + tooltiptextPath, gameObject);
         }
     }
+    public void SetTooltipImage (Sprite image) {
+        if (tooltipImageName != "") {
+            spawnedTooltip.transform.Find (tooltipImageName).GetComponent<Image> ().sprite = image;
+        }
+    }
 
     public void CopyTextFrom (TextMeshProUGUI targetText) { // a simple helper method that lets you quickly copy text into the tooltip text from another text!
         if (targetText != null) {
             SetTooltipText (targetText.text);
         }
+    }
+    public void CopyImageFrom (Image image) {
+        SetTooltipImage (image.sprite);
     }
     void Activate () {
         if (spawnedTooltip != null) {
@@ -142,13 +164,19 @@ public class GenericTooltip : MonoBehaviour, IPointerExitHandler, IPointerEnterH
         if (IsActive && moveToMousePosition) {
             // You can place this into a separate function for more controlled resolution changes
             min = new Vector3 (0, 0, 0);
-            max = new Vector3 (cam.pixelWidth, cam.pixelHeight, 0);
-            //max = new Vector3(Screen.width, Screen.height, 0f);
+            //max = new Vector3 (cam.pixelWidth, cam.pixelHeight, 0);
+            max = new Vector3 (Screen.width, Screen.height, 0f);
             //get the tooltip position with offset
             // This one also adds the width of the rect which doesn't work in a lot of situations so.
-            Vector3 position = new Vector3 (Input.mousePosition.x, Input.mousePosition.y - (rect.rect.height / 2 + y_offset), 0f);
+            Vector2 position = new Vector2 (Input.mousePosition.x, Input.mousePosition.y) + offset;
             //clamp it to the screen size so it doesn't go outside
-            spawnedTooltip.transform.position = new Vector3 (Mathf.Clamp (position.x, min.x + rect.rect.width / 2, max.x - rect.rect.width / 2), Mathf.Clamp (position.y, min.y + rect.rect.height / 2, max.y - rect.rect.height / 2), position.z);
+            targetMoveTransform.position = position;
+            //targetMoveTransform.position = new Vector3 (Mathf.Clamp (position.x, min.x + rect.rect.width / 2, max.x - rect.rect.width / 2), Mathf.Clamp (position.y, min.y + rect.rect.height / 2, max.y - rect.rect.height / 2), position.z);
+        }
+    }
+    void OnDestroy () {
+        if (destroySelfAutomatically) {
+            Destroy (spawnedTooltip);
         }
     }
 }

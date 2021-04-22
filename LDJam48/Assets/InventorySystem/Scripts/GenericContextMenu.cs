@@ -27,6 +27,7 @@ public enum ContextMenuEntryType {
     ACTIVATE = 4000,
     OPEN = 4200, // alt to activate
     TALK = 4001, // alt to activate
+    SIT = 4002, // alt to activate
     DEACTIVATE = 4100,
     CLOSE = 4300, // alt to deactivate
     // UI STUFF
@@ -161,7 +162,9 @@ public class GenericContextMenu : MonoBehaviour { // Add to regular Unity dropdo
     }
 
     public void ShowMenu (bool show) {
+
         if (show && active) {
+            Debug.Log ("Showing context menu of type " + type.ToString (), gameObject);
             contextMenuDropDown.Show ();
             currentlyVisible = true;
             menuOpened.Invoke (true);
@@ -178,6 +181,7 @@ public class GenericContextMenu : MonoBehaviour { // Add to regular Unity dropdo
                 cancelWatcher = StartCoroutine (CancelEventWatcher ());
             }
         } else {
+            Debug.Log ("Hiding context menu of type " + type.ToString (), gameObject);
             contextMenuDropDown.Hide ();
             currentlyVisible = false;
             menuClosed.Invoke (false);
@@ -214,9 +218,9 @@ public class GenericContextMenu : MonoBehaviour { // Add to regular Unity dropdo
         normalChildCount = contextMenuDropDown.transform.childCount;
         while (currentlyVisible) {
             yield return new WaitForSeconds (0.1f);
-            Debug.Log ("Current childcount: " + contextMenuDropDown.transform.childCount + " normal childcount: " + normalChildCount);
+            //Debug.Log ("Current childcount: " + contextMenuDropDown.transform.childCount + " normal childcount: " + normalChildCount);
             if (contextMenuDropDown.transform.childCount < normalChildCount) { // cancel event!!
-                Debug.Log ("Context Menu cancelled");
+                //  Debug.Log ("Context Menu cancelled");
                 ShowMenu (false);
             }
         };

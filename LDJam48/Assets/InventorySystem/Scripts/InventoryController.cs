@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Doozy.Engine;
 using Extensions;
 using TMPro;
 using UnityEngine;
@@ -36,8 +37,8 @@ public class InventoryController : MonoBehaviour {
     public Inventory_StackManipulator stackManipulator;
     public InventoryContextMenuController contextMenuController;
     public InventoryCraftingController craftingController;
-
     public Inventory_ConsumeWatcher consumeWatcher;
+    public GameObject tooltipCanvas;
     public Item_DragTarget mainDragTarget;
     public int maxSlots = 99;
     public bool isDragging = false;
@@ -59,19 +60,25 @@ public class InventoryController : MonoBehaviour {
     public InventoryItemAdded itemAddedEvent;
     public InventoryItemRemoved itemRemovedEvent;
 
-    void OnEnabled () {
+    /*void OnEnabled () {
         if (!allInventories.Contains (this)) {
             allInventories.Add (this);
         }
-    }
+    }*/
 
-    void OnDestroyed () {
+    void OnDestroy () {
         if (allInventories.Contains (this)) {
             allInventories.Remove (this);
         }
+        inventoryClosedEvent.RemoveAllListeners ();
+        inventoryOpenedEvent.RemoveAllListeners ();
+        itemAddedEvent.RemoveAllListeners ();
+        itemRemovedEvent.RemoveAllListeners ();
     }
 
     void Awake () {
+        // Set up inventory at start (and clears existing inventory)
+        //InitInventory (data, clearOnStart);
         if (!allInventories.Contains (this)) {
             allInventories.Add (this);
         }
@@ -94,32 +101,6 @@ public class InventoryController : MonoBehaviour {
         }
         defaultSortOrder = mainCanvas.sortingOrder;
 
-        // Add all item boxes to the allItemBoxes list and add listeners to them
-        allItemBoxes.Clear ();
-        for (int i = 0; i < inventoryParent.childCount; i++) {
-            Transform child = inventoryParent.GetChild (i);
-            Item_DragAndDrop tryGetBox = child.GetComponentInChildren<Item_DragAndDrop> ();
-            if (tryGetBox != null) {
-                AddItemBox (tryGetBox);
-            }
-        }
-
-        // Set up inventory at start (and clears existing inventory)
-        InitInventory (data, clearOnStart);
-
-        // This is the 'backup' dragtarget, letting you just drag and drop into the inventory
-        if (mainDragTarget != null) {
-            mainDragTarget.dragCompletedEvent.AddListener (OnDragCompleted);
-        }
-        // Add listeners to stack manipulator onfinished
-        stackManipulator.combineFinishedEvent.AddListener (FinishCombineStackManipulation);
-        stackManipulator.splitFinishedEvent.AddListener (FinishSplitStackManipulation);
-        // Hide/unhide the inventory!
-        if (hideOnInit) {
-            HideInventory (true);
-        } else {
-            ShowInventory (true);
-        }
     }
 
     void LoadAllItemDatas () {
@@ -138,6 +119,25 @@ public class InventoryController : MonoBehaviour {
     }
 
     public void InitInventory (InventoryData newData, bool clearPrevious = false) {
+
+        // Add all item boxes to the allItemBoxes list and add listeners to them
+        allItemBoxes.Clear ();
+        if (inventoryParent.childCount > 0) {
+            for (int i = 0; i < inventoryParent.childCount; i++) {
+                Transform child = inventoryParent.GetChild (i);
+                Item_DragAndDrop tryGetBox = child.GetComponentInChildren<Item_DragAndDrop> ();
+                if (tryGetBox != null) {
+                    AddItemBox (tryGetBox);
+                }
+            }
+        };
+        // This is the 'backup' dragtarget, letting you just drag and drop into the inventory
+        if (mainDragTarget != null) {
+            mainDragTarget.dragCompletedEvent.AddListener (OnDragCompleted);
+        }
+        // Add listeners to stack manipulator onfinished
+        stackManipulator.combineFinishedEvent.AddListener (FinishCombineStackManipulation);
+        stackManipulator.splitFinishedEvent.AddListener (FinishSplitStackManipulation);
 
         if (clearPrevious) {
             ClearInventory ();
@@ -181,9 +181,11 @@ public class InventoryController : MonoBehaviour {
                 };
                 // and finally actually add them, with randomized stack sizes!
                 foreach (RandomizedInventoryItem item in itemsToAdd) {
-                    int randomStackSize = Random.Range (item.randomStackSize.x, item.randomStackSize.y);
-                    if (randomStackSize > 0 && item.data != null) { // This setup allows for null datas, which can empty out slots!
-                        AddItem (item.data, randomStackSize);
+                    if (item.data != null) {
+                        int randomStackSize = Mathf.Clamp (Random.Range (item.randomStackSize.x, item.randomStackSize.y), 0, item.data.m_maxStackSize);
+                        if (randomStackSize > 0 && item.data != null) { // This setup allows for null datas, which can empty out slots!
+                            AddItem (item.data, randomStackSize);
+                        };
                     };
                 }
 
@@ -199,7 +201,17 @@ public class InventoryController : MonoBehaviour {
             if (consumeWatcher != null) {
                 consumeWatcher.InitEngine ();
             }
+            // INIT CRAFTING
+            if (craftingController != null) {
+                craftingController.Init ();
+            }
 
+            // Hide/unhide the inventory!
+            if (hideOnInit) {
+                HideInventory (true, false);
+            } else {
+                ShowInventory (true, false);
+            }
         }
     }
 
@@ -232,6 +244,9 @@ public class InventoryController : MonoBehaviour {
         }
     }
 
+    public void TryAddItem (ItemData itemData) {
+        AddItem (itemData);
+    }
     public bool AddItem (ItemData itemdata, int stackAmount = 1) { // add a box based on data, must spawn
         if (maxSlots >= allItemBoxes.Count) {
             Item_DragAndDrop newBox = SpawnBox (itemdata);
@@ -263,6 +278,9 @@ public class InventoryController : MonoBehaviour {
                 };
                 newItemBox.dragEnded.AddListener (OnDragEnd);
                 newItemBox.dragStarted.AddListener (OnDragStart);
+                if (tooltipCanvas != null) {
+                    newItemBox.targetBox.tooltip.tooltipCanvasParent = tooltipCanvas.transform;
+                }
                 newItemBox.UpdateInteractability ();
             }
             UpdateInventoryUI ();
@@ -334,7 +352,10 @@ public class InventoryController : MonoBehaviour {
                 clicked = 0;
                 clicktime = 0;
                 contextMenuController.ForceSelectOption (ContextMenuEntryType.UI_DROP, target.gameObject.GetComponent<UI_ItemBox> ());
-            } else if (clicked > 2 || Time.time - clicktime > 1) clicked = 0;
+            } else if (clicked > 2 || Time.time - clicktime > 1) { clicked = 0; };
+            if (contextMenuController != null) {
+                contextMenuController.SelectItem (target.gameObject.GetComponent<UI_ItemBox> ()); // no let's not do this
+            }
         }
     }
 
@@ -342,6 +363,7 @@ public class InventoryController : MonoBehaviour {
         isDragging = true;
         // Debug.Log ("Started drag");
         target.transform.SetAsLastSibling ();
+        contextMenuController.Cancel ();
         mainCanvas.sortingOrder = 999;
     }
     void OnDragEnd (Item_DragAndDrop target) {
@@ -400,9 +422,11 @@ public class InventoryController : MonoBehaviour {
         if (targetItem != null) {
             if (draggedItem.targetBox.data == targetItem.targetBox.data) {
                 if (targetItem.targetBox.StackSize < targetItem.targetBox.data.m_maxStackSize) { // there's space!
-                    stackManipulator.StartManipulator (draggedItem, targetItem);
-                    return true;
-                };
+                    if (stackManipulator.CheckCompatibility (draggedItem)) {
+                        stackManipulator.StartManipulator (draggedItem, targetItem);
+                        return true;
+                    };
+                }
             } else {
                 //      Debug.Log ("Internal combination failed: incompatible data");
             }
@@ -417,8 +441,10 @@ public class InventoryController : MonoBehaviour {
         if (SpaceLeft > 0 || targetItem != null) {
             // Dragged item is external; if it has a stack size, let's let the player pick how much is dropped
             if (draggedItem.targetBox.StackSize > 1 || (draggedItem.targetBox.StackSize == 1 && targetItem != null)) {
-                stackManipulator.StartManipulator (draggedItem, targetItem);
-                return true;
+                if (stackManipulator.CheckCompatibility (draggedItem)) {
+                    stackManipulator.StartManipulator (draggedItem, targetItem);
+                    return true;
+                }
             }
         }
         return false;
@@ -439,19 +465,21 @@ public class InventoryController : MonoBehaviour {
         }
     }
 
-    void TryTakeItemFromInventory (Item_DragAndDrop item, Item_DragAndDrop targetSlot) { // if allowed - assumption is if inventories are visible, they'll take stuff
+    public void TryTakeItemFromInventory (Item_DragAndDrop item, Item_DragAndDrop targetSlot) { // if allowed - assumption is if inventories are visible, they'll take stuff
         InventoryController targetObjectParent = item.GetComponentInParent<InventoryController> ();
         if (targetObjectParent == null) { // No parent? Floating magical lonely boy. Oh well, yoink.
             AddItemBox (item);
         } else {
             if (permittedItemSources.Contains (targetObjectParent.type)) { // permitted inventory type!
-                bool attemptTake = AddItemBox (item);
-                if (attemptTake) { // success! remove the box from the other inventory
-                    targetObjectParent.RemoveItemBox (item);
-                    SwitchPlacesInsideInventory (item, targetSlot);
-                    //Debug.Log (name + " stole item " + item.name + " successfully from " + targetObjectParent.name);
-                } else { // else we fail and just let it do whatever
-                    //Debug.Log (name + " attempted to steal item " + item.name + " from " + targetObjectParent.name + " but failed (no space)");
+                if (item.targetBox.draggable) { // can it be taken?
+                    bool attemptTake = AddItemBox (item);
+                    if (attemptTake) { // success! remove the box from the other inventory
+                        targetObjectParent.RemoveItemBox (item);
+                        SwitchPlacesInsideInventory (item, targetSlot);
+                        //Debug.Log (name + " stole item " + item.name + " successfully from " + targetObjectParent.name);
+                    } else { // else we fail and just let it do whatever
+                        //Debug.Log (name + " attempted to steal item " + item.name + " from " + targetObjectParent.name + " but failed (no space)");
+                    }
                 }
             } else {
                 //Debug.Log (name + " attempted to steal item " + item.name + " from " + targetObjectParent.name + " but failed (not permitted)");
@@ -552,25 +580,75 @@ public class InventoryController : MonoBehaviour {
         }
     }
 
-    public void ShowInventory (bool force = false) {
+    public void ShowInventory (bool force = false, bool sendEvent = true) {
         // Fancy code for showing inventory, maybe some doozy control graphs
         if (!Visible || force) { // Only want to invoke event if actually hidden
-            canvasGroup.interactable = true;
-            canvasGroup.alpha = 1f;
-            canvasGroup.blocksRaycasts = true;
+            // canvasGroup.interactable = true;
+            // canvasGroup.alpha = 1f;
+            // canvasGroup.blocksRaycasts = true;
+            Debug.Log ("Showing inventory.", gameObject);
+            switch (type) {
+                case InventoryType.PLAYER:
+                    {
+                        GameEventMessage.SendEvent ("ShowPlayerInventory");
+                        break;
+                    }
+                case InventoryType.LOOTABLE:
+                    {
+                        //GameEventMessage.SendEvent ("ShowLootingInventory");
+                        canvasGroup.interactable = true;
+                        canvasGroup.alpha = 1f;
+                        canvasGroup.blocksRaycasts = true;
+                        break;
+                    }
+                case InventoryType.CRAFTING:
+                    {
+                        GameEventMessage.SendEvent ("ShowCraftingInventory");
+                        if (craftingController != null) {
+                            craftingController.Active = true;
+                        } else {
+                            Debug.LogWarning ("Inventory set to 'crafting' has null crafting-controller!");
+                        };
+                        break;
+                    }
+                default:
+                    {
+                        GameEventMessage.SendEvent ("ShowPlayerInventory");
+                        break;
+                    }
+
+            }
             m_isActive = true;
-            inventoryOpenedEvent.Invoke (this);
+            if (sendEvent) {
+                inventoryOpenedEvent.Invoke (this);
+            };
+
+        } else {
+            Debug.Log ("NOT Showing inventory because " + Visible, gameObject);
         };
     }
-    public void HideInventory (bool force = false) {
+    public void HideInventory (bool force = false, bool sendEvent = true) {
+        Debug.Log ("Hiding inventory", gameObject);
         // Fancy code for hiding inventory, maybe some doozy control graphs
         if (Visible || force) { // we don't want to invoke the event for this unless we're actually hidden
-            canvasGroup.interactable = false;
-            canvasGroup.alpha = 0f;
-            canvasGroup.blocksRaycasts = false;
+            //canvasGroup.interactable = false;
+            //canvasGroup.alpha = 0f;
+            //canvasGroup.blocksRaycasts = false;
+            if (type == InventoryType.LOOTABLE) {
+                canvasGroup.interactable = false;
+                canvasGroup.alpha = 0f;
+                canvasGroup.blocksRaycasts = false;
+            } else {
+                GameEventMessage.SendEvent ("CloseInventory");
+            }
             m_isActive = false;
             stackManipulator.Active = false;
-            inventoryClosedEvent.Invoke (this);
+            if (craftingController != null) {
+                craftingController.Active = false;
+            };
+            if (sendEvent) {
+                inventoryClosedEvent.Invoke (this);
+            };
         };
     }
 

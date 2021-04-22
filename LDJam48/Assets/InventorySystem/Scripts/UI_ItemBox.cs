@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class UI_ItemBox : MonoBehaviour {
     public ItemData data;
+    public TextMeshProUGUI nameText;
     public TextMeshProUGUI descriptionText;
     public TextMeshProUGUI amountText;
     public Image itemImage;
@@ -15,6 +16,7 @@ public class UI_ItemBox : MonoBehaviour {
     public Animator animator;
     private int m_stackAmount = 1;
     public bool draggable = true;
+    public bool consumable = true;
     public bool highlight = true;
 
     public bool stackable = true;
@@ -49,11 +51,13 @@ public class UI_ItemBox : MonoBehaviour {
         if (data != null) {
             descriptionText.text = string.Format (data.m_descriptionTextFormat, data.m_description, data.m_displayName, StackSize, data.m_maxStackSize);
             itemImage.sprite = data.m_image;
+            nameText.text = data.m_displayName;
             ParseItemData ();
             highlight = true;
         } else {
             itemImage.sprite = null;
             descriptionText.text = "";
+            nameText.text = "";
             tooltip.IsActive = false;
             SetDraggable (false);
             highlight = false;
@@ -121,6 +125,11 @@ public class UI_ItemBox : MonoBehaviour {
                 case ItemTrait.DRAGGABLE:
                     {
                         SetDraggable (true);
+                        break;
+                    }
+                case ItemTrait.CONSUMABLE:
+                    {
+                        consumable = true;
                         break;
                     }
             }

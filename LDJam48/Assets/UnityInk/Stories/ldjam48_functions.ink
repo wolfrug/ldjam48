@@ -3,6 +3,43 @@
 VAR debug = true
 VAR sayStarted = false
 
+VAR checkItem = -1
+
+LIST characters = Sadie, George, Ashley, Peter, Egroeg
+
+LIST items = test1
+
+EXTERNAL CheckHasItem(x,y)
+EXTERNAL ConsumeItem(x,y)
+
+==function Consume(item, amount)==
+{CheckItem(item, amount)>=amount:
+{ConsumeItem(ConvertToString(item), amount)}
+- else:
+[Cannot consume item - not enough in Player inventory!]
+}
+==function CheckItem(item, amount)==
+// Helper function
+{CheckHasItem(ConvertToString(item), "checkItem")}
+~return checkItem
+
+===function ConsumeItem(itemName, amount)===
+(Attempted consumption of {amount} {itemName})
+
+===function CheckHasItem(itemName, returnVar)===
+~checkItem = 2
+
+===function ConvertToString(targetItem)===
+// Add more items to this list as needed
+~temp returnVar = ""
+{targetItem:
+- test1:
+~returnVar = "test1"
+}
+// and return
+~return returnVar
+
+
 ===function UseButton(buttonName)===
 <>{not debug:
 \[useButton.{buttonName}]

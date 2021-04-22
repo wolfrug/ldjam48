@@ -8,6 +8,7 @@ public enum InventoryType {
     NPC = 1100,
     LOOTABLE = 2000,
     CRAFTING = 3000,
+    ACTIONBAR = 4000,
 }
 
 [System.Serializable]

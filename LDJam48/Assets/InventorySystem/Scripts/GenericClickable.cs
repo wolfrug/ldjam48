@@ -35,7 +35,8 @@ public class OnMouseBeginDrag : UnityEvent<GenericClickable> { }
 public class OnMouseEndDrag : UnityEvent<GenericClickable> { }
 
 public class GenericClickable : MonoBehaviour, IPointerClickHandler, IPointerDownHandler, IPointerUpHandler, IPointerEnterHandler, IPointerExitHandler, IBeginDragHandler, IDragHandler, IEndDragHandler {
-    // Start is called before the first frame update
+    
+    public LayerMask targetMasks;
     public OnMouseDown onMouseDownEvent;
     public bool onMouseDownActive = true;
 

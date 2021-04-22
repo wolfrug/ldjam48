@@ -24,6 +24,7 @@ public class Inventory_Manipulated_Action {
 public class Inventory_ActionListener : MonoBehaviour // Use to listen to various inventory actions and react accordingly, e.g. for animations or the like (cross scene also)
 {
     public InventoryController playerInventory;
+    public InventoryController actionBarInventory;
     public Player_Consume_Action[] defaultPlayerConsumeActions;
     public Inventory_Manipulated_Action[] defaultInventoryManipulatedActions;
     // Start is called before the first frame update
@@ -32,7 +33,12 @@ public class Inventory_ActionListener : MonoBehaviour // Use to listen to variou
         if (playerInventory == null) {
             playerInventory = InventoryController.GetInventoryOfType (InventoryType.PLAYER, null, false);
         }
+        if (actionBarInventory == null) {
+            actionBarInventory = InventoryController.GetInventoryOfType (InventoryType.ACTIONBAR, null, false);
+        }
+
         playerInventory.contextMenuController.itemConsumedEvent.AddListener (ItemConsumed);
+        actionBarInventory.contextMenuController.itemConsumedEvent.AddListener (ItemConsumed);
         foreach (InventoryController controller in InventoryController.allInventories) {
             controller.inventoryOpenedEvent.AddListener (OnInventoryOpen);
             controller.inventoryClosedEvent.AddListener (OnInventoryClosed);

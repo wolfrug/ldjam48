@@ -281,4 +281,18 @@ public class GameManager : MonoBehaviour {
         }
     }
 
+    // Various game-specific things
+    public void StartDrowning () {
+        SurvivalManager.instance.StartPermanentEffect (DamageType.HEALTH, -0.1f, 1f, "drowning");
+    }
+    public void StopDrowning () {
+        SurvivalManager.instance.StopPermanentEffect ("drowning");
+    }
+    public void RefillOxygen (float amountPercentage) {
+        float maxOxygen = SurvivalManager.instance.GetHealthBar (DamageType.OXYGEN).minMaxHealth.y;
+        maxOxygen *= amountPercentage;
+        Debug.Log ("Current oxygen to be added: " + maxOxygen + " percentage: " + amountPercentage);
+        SurvivalManager.instance.SpawnHealthEffect (DamageType.OXYGEN, maxOxygen / 2f, 2f);
+    }
+
 }

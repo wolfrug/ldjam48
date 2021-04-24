@@ -3,6 +3,10 @@ INCLUDE ldjam48_journal.ink
 
 // Default main story object - always have a stitch named ==start
 
+{debug:
+->start
+}
+
 ==start
 This is the start of the story.
 

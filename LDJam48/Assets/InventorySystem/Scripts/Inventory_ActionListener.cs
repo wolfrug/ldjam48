@@ -36,9 +36,12 @@ public class Inventory_ActionListener : MonoBehaviour // Use to listen to variou
         if (actionBarInventory == null) {
             actionBarInventory = InventoryController.GetInventoryOfType (InventoryType.ACTIONBAR, null, false);
         }
-
-        playerInventory.contextMenuController.itemConsumedEvent.AddListener (ItemConsumed);
-        actionBarInventory.contextMenuController.itemConsumedEvent.AddListener (ItemConsumed);
+        if (playerInventory != null) {
+            playerInventory.contextMenuController.itemConsumedEvent.AddListener (ItemConsumed);
+        };
+        if (actionBarInventory != null) {
+            actionBarInventory.contextMenuController.itemConsumedEvent.AddListener (ItemConsumed);
+        };
         foreach (InventoryController controller in InventoryController.allInventories) {
             controller.inventoryOpenedEvent.AddListener (OnInventoryOpen);
             controller.inventoryClosedEvent.AddListener (OnInventoryClosed);

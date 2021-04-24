@@ -7,10 +7,11 @@ VAR checkItem = -1
 
 LIST characters = Sadie, George, Ashley, Peter, Egroeg
 
-LIST items = test1
+LIST items = test1, fuel_battery
 
 EXTERNAL CheckHasItem(x,y)
 EXTERNAL ConsumeItem(x,y)
+EXTERNAL AddItem(x,y)
 
 ==function Consume(item, amount)==
 {CheckItem(item, amount)>=amount:
@@ -18,6 +19,8 @@ EXTERNAL ConsumeItem(x,y)
 - else:
 [Cannot consume item - not enough in Player inventory!]
 }
+===function Add(item, amount)===
+{AddItem(ConvertToString(item), amount)}
 ==function CheckItem(item, amount)==
 // Helper function
 {CheckHasItem(ConvertToString(item), "checkItem")}
@@ -35,6 +38,8 @@ EXTERNAL ConsumeItem(x,y)
 {targetItem:
 - test1:
 ~returnVar = "test1"
+- fuel_battery:
+~returnVar = "fuel_battery"
 }
 // and return
 ~return returnVar

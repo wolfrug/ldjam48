@@ -259,6 +259,25 @@ public class GameManager : MonoBehaviour {
             Debug.LogWarning ("Failed to destroy the required amount of item " + m_id + "(" + m_id + ")");
         }
     }
+    public void Ink_AddItem (object[] inputVariables) {
+        //variable 0 -> m_id of item looked for
+        //variable 1 -> integer of number of items to add
+        // note -> it's up to the inkist to check that there is enough before committing, there is no confirmation!
+        int amount = (int) inputVariables[1];
+        string m_id = (string) inputVariables[0];
+        ItemData data = InventoryController.GetDataByID (m_id);
+        if (data == null) {
+            Debug.LogWarning ("No such item with ID" + m_id);
+            return;
+        }
+        if (!PlayerInventory.AddItem (data, amount)) {
+            Debug.LogWarning ("Failed to add the required amount of item " + m_id + "(" + m_id + ")");
+        }
+    }
+
+    public void AddItem (ItemData item) {
+        PlayerInventory.AddItem (item, 1);
+    }
 
     public BasicAgent Player {
         get {

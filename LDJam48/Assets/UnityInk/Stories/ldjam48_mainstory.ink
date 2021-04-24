@@ -36,7 +36,11 @@ Looks like everything is fine here.
 ->finishRadio
 
 ==inspect_level1_test2
-Yep, that is a placeholder.
+{CheckItem(fuel_battery, 1)<1: Oh look, a battery.|Nothing here.}
++ {CheckItem(fuel_battery, 1)<1}[Pick it up!]
+{Add(fuel_battery, 1)}
++ [Never mind.]
+-
 ->finishRadio
 
 ==inspect_level2_test1

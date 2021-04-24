@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.00.00">
+	<object class="AudioFile" id="{53812392-cb2e-418a-a345-b664cc6e1ced}">
+		<property name="assetPath">
+			<value>SFX_Stevie_Breathing_3_5.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>1</value>
+		</property>
+		<property name="length">
+			<value>1.4838541666666667</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{e33976c9-fef0-4142-838b-04ba85dc8fd7}</destination>
+		</relationship>
+	</object>
+</objects>

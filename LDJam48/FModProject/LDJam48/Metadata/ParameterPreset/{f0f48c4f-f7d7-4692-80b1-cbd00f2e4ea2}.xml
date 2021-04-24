@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.00.00">
+	<object class="ParameterPreset" id="{f0f48c4f-f7d7-4692-80b1-cbd00f2e4ea2}">
+		<property name="name">
+			<value>Oxygen</value>
+		</property>
+		<relationship name="folder">
+			<destination>{6a8877d6-7b78-4dbc-b600-84bf2bc6e4aa}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{39bc088b-5229-40a6-9079-b8a70917e3fb}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{39bc088b-5229-40a6-9079-b8a70917e3fb}">
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+		<property name="seekSpeed">
+			<value>0.31000003218650818</value>
+		</property>
+	</object>
+</objects>

@@ -24,6 +24,25 @@ Om nom.
 
 + [Close writer.] ->DONE
 
+==finishRadio
+->DONE
+
 ==inspectTest
 It's a thingie. Yay!
 ->DONE
+
+==inspect_level1_test1
+Looks like everything is fine here.
+->finishRadio
+
+==inspect_level1_test2
+Yep, that is a placeholder.
+->finishRadio
+
+==inspect_level2_test1
+I made the background sprite a little darker, did you notice?.
+->finishRadio
+
+==inspect_level2_test2
+There's nothing else to do now.
+->finishRadio

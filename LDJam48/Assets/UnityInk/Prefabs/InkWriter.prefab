@@ -238,7 +238,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 2451850639766154931}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0
+  m_Size: 0.9935058
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -355,7 +355,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.00021362305, y: -951.71533}
+  m_AnchoredPosition: {x: 0.00021362305, y: -249.72816}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.49999994, y: 0.00000004831913}
 --- !u!114 &2451850639757026881
@@ -1027,8 +1027,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -315.5, y: -64.1}
-  m_SizeDelta: {x: 579, y: 951.71533}
+  m_AnchoredPosition: {x: -315.5, y: -415.09357}
+  m_SizeDelta: {x: 579, y: 249.7283}
   m_Pivot: {x: 0.5, y: 0.50000006}
 --- !u!114 &2451850641276136226
 MonoBehaviour:
@@ -1343,7 +1343,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2451850641461178043
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2743,8 +2743,7 @@ PrefabInstance:
     - target: {fileID: 4432329674218182191, guid: 62ef996e5b114ee45a2fba9113fb3286,
         type: 3}
       propertyPath: m_text
-      value: option button text option button textoption button textoption button
-        textoption button textoption button textoption button text
+      value: option button text option
       objectReference: {fileID: 0}
     - target: {fileID: 4432329674218182191, guid: 62ef996e5b114ee45a2fba9113fb3286,
         type: 3}

@@ -140,7 +140,7 @@ EXTERNAL AddItem(x,y)
 //- Valfrig:
 //#spawn.portrait.valfrig
 //}
-{character}: {text}
+{character!="": {character}: {text}|<i>{text}</i>}
 {EndSay()}
 ->->
 

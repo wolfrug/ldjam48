@@ -59,15 +59,15 @@ public class TypeWriter : MonoBehaviour {
         string theText = Text;
         if (clearText) {
             if (clearOldTextWithFade) {
-              //  Debug.Log ("Clearing old text with fade and writing - return");
+                //  Debug.Log ("Clearing old text with fade and writing - return");
                 StartCoroutine (FadeOutTextAndWrite (theText));
                 return;
             } else {
-            //    Debug.Log ("Clearing old text, no fade");
+                //    Debug.Log ("Clearing old text, no fade");
                 ClearWriter ();
             }
         } else {
-          //  Debug.Log ("Adding new text to old text, no clear.");
+            //  Debug.Log ("Adding new text to old text, no clear.");
             theText = self_.text + " " + Text;
         }
         textToWrite_ = theText;
@@ -99,7 +99,7 @@ public class TypeWriter : MonoBehaviour {
             isWriting_ = true;
             startedEvent_.Invoke (this);
         };
-      //  Debug.Log ("Writing text: " + theText);
+        //  Debug.Log ("Writing text: " + theText);
         if (!useFade_) {
             // Write the text out one letter at a time
             int stringLength = theText.Length;
@@ -124,10 +124,20 @@ public class TypeWriter : MonoBehaviour {
             string writtenText = "";
             string textLeft = theText;
             skipWrite_ = false;
+            bool skippingCode = false;
             //StartCoroutine (CharacterFader ());
             for (int i = 0; i < stringLength; i++) {
                 textLeft = textLeft.Remove (0, 1);
-                self_.text = writtenText + "<alpha=#22>" + theText[i] + "<alpha=#00>" + textLeft;
+                if (IsCodeChar (theText[i]) && !skippingCode) { // we do not print code characters
+                    skippingCode = true;
+                    Debug.Log ("Skipping code char " + theText[i]);
+                } else if (IsCodeChar (theText[i]) && skippingCode) { // we reach another code character -> code is done
+                    skippingCode = false;
+                    Debug.Log ("Finished skipping code: " + theText[i]);
+                }
+                if (!skippingCode) {
+                    self_.text = writtenText + "<alpha=#22>" + theText[i] + "<alpha=#00>" + textLeft;
+                };
                 //CharacterFader ();
                 writtenText += "<alpha=#22>" + theText[i];
                 writtenText = CharacterFader (writtenText);
@@ -135,7 +145,11 @@ public class TypeWriter : MonoBehaviour {
                 if (IsPunctuation (theText[i])) {
                     yield return new WaitForSeconds (punctuationPause);
                 }
-                yield return new WaitForSeconds (1f / textSpeed_);
+                if (!skippingCode) { // do not wait if we're skipping code
+                    yield return new WaitForSeconds (1f / textSpeed_);
+                } else {
+                    yield return null;
+                }
                 if (skipWrite_) {
                     break;
                 }
@@ -165,6 +179,15 @@ public class TypeWriter : MonoBehaviour {
         }
         return false;
     }
+    public bool IsCodeChar (char character) {
+        switch (character) {
+            case '<':
+                return true;
+            case '>':
+                return true;
+        }
+        return false;
+    }
     string CharacterFader (string targetText) {
         if (isWriting_) {
             string selfText = targetText;
@@ -188,7 +211,7 @@ public class TypeWriter : MonoBehaviour {
         return "";
     }
     public void ClearWriter () {
-      //  Debug.Log ("Clearing writer");
+        //  Debug.Log ("Clearing writer");
         self_.text = "";
     }
 

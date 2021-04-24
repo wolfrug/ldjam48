@@ -7,6 +7,7 @@ public class GenericHealthBar : MonoBehaviour {
     public Image healthBar;
     public float healthPercentage = 1f;
     public Vector2 minMaxHealth = new Vector2 (0f, 1f);
+    public Animator animator;
     [SerializeField]
     private float m_currentHealth = 1f;
     // Start is called before the first frame update
@@ -31,5 +32,8 @@ public class GenericHealthBar : MonoBehaviour {
             healthPercentage = 0f;
         }
         healthBar.fillAmount = healthPercentage;
+        if (animator != null) {
+            animator.SetFloat ("percentage", healthPercentage);
+        }
     }
 }

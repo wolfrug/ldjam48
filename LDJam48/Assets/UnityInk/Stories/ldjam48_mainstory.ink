@@ -32,7 +32,7 @@ It's a thingie. Yay!
 ->DONE
 
 ==inspect_level1_test1
-Looks like everything is fine here.
+->Say("Looks like everything is fine here.", "")->
 ->finishRadio
 
 ==inspect_level1_test2

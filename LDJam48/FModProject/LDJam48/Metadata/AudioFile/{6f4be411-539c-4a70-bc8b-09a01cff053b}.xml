@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.00.00">
+	<object class="AudioFile" id="{6f4be411-539c-4a70-bc8b-09a01cff053b}">
+		<property name="assetPath">
+			<value>SFX_Elevator_Hum.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>1</value>
+		</property>
+		<property name="length">
+			<value>2.2261458333333333</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{e33976c9-fef0-4142-838b-04ba85dc8fd7}</destination>
+		</relationship>
+	</object>
+</objects>

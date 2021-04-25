@@ -5,7 +5,7 @@
 			<value>AMB_Silo_BG</value>
 		</property>
 		<property name="outputFormat">
-			<value>5</value>
+			<value>1</value>
 		</property>
 		<relationship name="folder">
 			<destination>{1a42458d-883e-456b-b5c6-22f0a53fc758}</destination>
@@ -215,6 +215,12 @@
 		</relationship>
 	</object>
 	<object class="SoundScatterer" id="{2fc96dc5-9038-40c6-af9d-7c22fd80932b}">
+		<property name="triggerProbabilityEnabled">
+			<value>true</value>
+		</property>
+		<property name="triggerProbability">
+			<value>38</value>
+		</property>
 		<property name="length">
 			<value>28.139687500000001</value>
 		</property>
@@ -292,7 +298,14 @@
 			<destination>{edffe38e-dce6-445c-8c0a-f0461864fc20}</destination>
 		</relationship>
 	</object>
-	<object class="MixerBusPanner" id="{b1fa7c3f-c35f-4a0c-bb39-166522d3966e}" />
+	<object class="MixerBusPanner" id="{b1fa7c3f-c35f-4a0c-bb39-166522d3966e}">
+		<property name="overridingOutputFormat">
+			<value>1</value>
+		</property>
+		<property name="outputFormatOverridden">
+			<value>true</value>
+		</property>
+	</object>
 	<object class="MultiSound" id="{2f46fafe-4b2f-44df-bfd8-2ff65c325baf}">
 		<property name="playlistMode">
 			<value>1</value>
@@ -312,7 +325,14 @@
 			<destination>{12dc67b4-fa04-448c-988d-8eb41237251d}</destination>
 		</relationship>
 	</object>
-	<object class="MixerBusPanner" id="{ebb1ffaf-cc8a-4693-b5b4-ab444878e03e}" />
+	<object class="MixerBusPanner" id="{ebb1ffaf-cc8a-4693-b5b4-ab444878e03e}">
+		<property name="overridingOutputFormat">
+			<value>1</value>
+		</property>
+		<property name="outputFormatOverridden">
+			<value>true</value>
+		</property>
+	</object>
 	<object class="MultiSound" id="{5d7dba89-26e5-4b3c-98c9-0134b2081b7a}">
 		<property name="playlistMode">
 			<value>1</value>
@@ -330,7 +350,17 @@
 			<destination>{af7bbc53-a98b-416c-92c4-ab805e5ddb32}</destination>
 		</relationship>
 	</object>
-	<object class="MixerBusPanner" id="{b3a1fb0a-9bbd-4b90-9a7a-b0ec68f14d07}" />
+	<object class="MixerBusPanner" id="{b3a1fb0a-9bbd-4b90-9a7a-b0ec68f14d07}">
+		<property name="surroundPanDirection">
+			<value>-167.446106</value>
+		</property>
+		<property name="overridingOutputFormat">
+			<value>1</value>
+		</property>
+		<property name="outputFormatOverridden">
+			<value>true</value>
+		</property>
+	</object>
 	<object class="MixerBusFader" id="{336d859a-b9b3-4609-bbb3-85f03558b8a3}" />
 	<object class="MixerBusFader" id="{9f6560be-4a63-4ae9-acd5-93228a23f6c3}" />
 	<object class="SingleSound" id="{668ebe2f-b1bd-4c18-8298-e4245fc24724}">

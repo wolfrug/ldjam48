@@ -8,59 +8,60 @@ INCLUDE ldjam48_journal.ink
 }
 
 ==start
-This is the start of the story.
 
-Do we have test1? {CheckItem(test1, 1): Yep, we have {print_num(checkItem)} amount! | Nope}
+{Max} Hello? Did you make it *skrr* … *skrrr* okay?
 
-->Say("This is a dialogue", "MyCharacter")->
+{Stevie} Max? You’re breaking up.
 
-+ {CheckItem(test1, 1)} [We have one of item1, let's eat it]
-{Consume(test1, 1)}
-Om nom.
-->DONE
-+ [Open the journal] ->OpenJournalInt->
+{Max} *skrr* reception is shot *whine skrr* storm coming…
 
-- And that's all for now.
+{Stevie} Figures.
 
-+ [Close writer.] ->DONE
+{Max} *skrrrr*
+
+{Stevie} All right. I need to find a spot with better reception.
+
+<color=green>[TUTORIAL: Walk around by clicking the mouse until you find a spot where the signal is clear.]</color>
+#openinventory
+<color=green>[TUTORIAL: Then open the inventory (lower left) and click on the Walkie-Talkie to use it!.]
+
+->finishRadio
 
 ==finishRadio
 ->DONE
 
 ==TryRadio
 {tunerID:
--"tuningTest":
-Woop! It works! You found it!
-->finishRadio
+-"MaxTalk1":
+->MaxTalk.Talk1
 - else:
-You can't pick anything up.
+{Stevie} Ugh. No reception. Typical.
 }
 ->finishRadio
 
-==inspectTest
-It's a thingie. Yay!
-->DONE
+==MaxTalk
 
-==inspect_level1_test1
-->Say("Looks like everything is fine here.", "")->
-->finishRadio
+=Talk1
+{Stevie} Max? Do you copy?
 
-==inspect_level1_test2
-{CheckItem(fuel_battery, 1)<1: Oh look, a battery.|Nothing here.}
-+ {CheckItem(fuel_battery, 1)<1}[Pick it up!]
-{Add(fuel_battery, 1)}
-+ [Never mind.]
--
-->finishRadio
+{Max} Stevie, finally! What’s up with the signal done there?
 
-==inspect_level2_test1
-I made the background sprite a little darker, did you notice?.
-->finishRadio
+{Stevie} Eh, who knows. 
 
-==inspect_level2_test2
-There's nothing else to do now.
-->finishRadio
+{Stevie} These old research stations are built like tanks, it’s probably just interference from the hull.
 
-==tuningTest
-The radio is tuned! Success!
+{Max} Pre-war engineering at it’s finest.
+
+{Stevie} You can say that again.
+
+{Max} Well whatever you do, do it fast. Looks like a storm is browning, and you know how those get this close to the Rift.
+
+{Stevie} Just need to find a console to reboot the system, and then we’re out of here.
+
+{Max} Alright partner, there should be an access point on the second floor. 
+
+{Max} Try the elevator, and if you need anything I’m just a whisper away. Max out!
+
+{Stevie} Heh, idiot. 
+
 ->finishRadio

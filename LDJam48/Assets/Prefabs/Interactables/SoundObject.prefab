@@ -128,11 +128,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5934a2647a977c4a95bfcbec8a6f0a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tunerId: tuningTest
   tunerController: {fileID: 6246093369842579984}
   active: 1
   optimalDistance: 6.32
   invokeOnce: 0
-  knotTarget: tuningTest
   gaugeAnimator: {fileID: 0}
   radioButton: {fileID: 0}
   tunedEvent:
@@ -140,7 +140,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 6246093369842579990}
         m_TargetAssemblyTypeName: RadioTunerObject, Assembly-CSharp
-        m_MethodName: ActivateButton
+        m_MethodName: SetTunerID
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -155,7 +155,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 6246093369842579990}
         m_TargetAssemblyTypeName: RadioTunerObject, Assembly-CSharp
-        m_MethodName: DeactivateButton
+        m_MethodName: DesetTunerID
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -183,6 +183,7 @@ MonoBehaviour:
   currentValue: 0
   currentEffectiveValue: 0
   emitter: {fileID: 6246093369842579991}
+  m_active: 1
 --- !u!114 &6246093369842579991
 MonoBehaviour:
   m_ObjectHideFlags: 0

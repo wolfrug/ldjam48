@@ -11,6 +11,10 @@ LIST items = test1, fuel_battery
 
 VAR tunerID = ""
 
+VAR Stevie = "<color=grey>Stevie:</color>"
+VAR Max = "<color=yellow>Max:</color>"
+VAR Voice = "<color=purple>Voice:</color>"
+
 EXTERNAL CheckHasItem(x,y)
 EXTERNAL ConsumeItem(x,y)
 EXTERNAL AddItem(x,y)
@@ -23,6 +27,8 @@ EXTERNAL AddItem(x,y)
 }
 ===function Add(item, amount)===
 {AddItem(ConvertToString(item), amount)}
+==function AddItem(item, amount)===
+{Add(item, amount)}
 ==function CheckItem(item, amount)==
 // Helper function
 {CheckHasItem(ConvertToString(item), "checkItem")}

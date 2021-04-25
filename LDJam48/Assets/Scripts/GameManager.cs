@@ -52,7 +52,7 @@ public class GameManager : MonoBehaviour {
     }
     void Start () {
         if (initOnStart) {
-            Init (); // uncomment if not going via mainmenu
+            Invoke ("Init", 1f); // uncomment if not going via mainmenu
         };
         //AudioManager.instance.PlayMusic ("MusicBG");
     }
@@ -60,12 +60,15 @@ public class GameManager : MonoBehaviour {
     [NaughtyAttributes.Button]
     public void Init () {
         SetState (GameStates.INIT);
-        //Invoke ("FixTerribleBug", 1f);
+        //Invoke ("FixTerribleBug", 5f);
         //NextState ();
     }
 
-    void FixTerribleBug () {
-        //InkWriter.main.StartStory ();
+    public void FixTerribleBug () {
+        Invoke (nameof (StartStoryLate), 0.2f);
+    }
+    void StartStoryLate () {
+        InkWriter.main.StartStory ();
     }
 
     void Late_Init () {
@@ -80,7 +83,7 @@ public class GameManager : MonoBehaviour {
         if (currentState.nextState != GameStates.NONE) {
             if (gameStateDict[currentState.state].nextState == GameStates.LATE_INIT) { // late init inits a bit late and only works thru nextstate
                 Invoke ("Late_Init", lateInitWait);
-                Debug.Log ("Invoking late init");
+                // Debug.Log ("Invoking late init");
                 return;
             } else {
                 Debug.Log ("Invoking Next State " + "(" + gameStateDict[currentState.state].nextState.ToString () + ")");

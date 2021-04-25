@@ -49,7 +49,7 @@ public class GenericClickToMove : MonoBehaviour {
         EventSystem.current.RaycastAll (pointerEventData, raycastResults);
 
         if (raycastResults.Count > 0) {
-            Debug.LogWarning ("Hit UI, quitting.");
+           // Debug.LogWarning ("Hit UI, quitting.");
             return;
         }
 

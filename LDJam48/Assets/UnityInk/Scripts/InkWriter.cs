@@ -105,6 +105,7 @@ public class InkWriter : MonoBehaviour {
         story = new Story (inkStoryObject.inkJsonAsset.text);
         inkStoryObject.Init ();
         InkWriter.main.story.variablesState["debug"] = false;
+        Debug.Log ("Inited ink story object");
     }
 
     void Start () {
@@ -127,43 +128,47 @@ public class InkWriter : MonoBehaviour {
 
     // Creates a new Story object with the compiled story which we can then play!
     public void StartStory () {
-        HideCanvas (false);
-
-        if (clearOnNewStory) {
-            ClearChildren ();
-        }
-
-        lastText = "";
-        lastSaveableTags = "";
-
-        //string savedJson = PlayerPrefs.GetString(inkStoryObject.storyName + "savedInkStory");
-        /*string savedJson = "";
-        if (ES3.KeyExists (inkStoryObject.storyName + "_hasSaved")) {
-            if (ES3.KeyExists (inkStoryObject.storyName + "savedInkStory")) {
-                savedJson = ES3.Load<string> (inkStoryObject.storyName + "savedInkStory");
-            };
-            if (savedJson != "") {
-                InkWriter.main.story.state.LoadJson (savedJson);
-                Debug.Log ("Loading story");
-                lastText = (string) InkWriter.main.story.variablesState["lastSavedString"];
-                lastSaveableTags = (string) InkWriter.main.story.variablesState["lastSavedTags"];
-                Debug.Log ("Tags at load point: " + lastSaveableTags);
-                loading = true;
-            } else { // no saved json -> go to "start" knot
-                InkWriter.main.story.variablesState["debug"] = false;
-                if (mainWriter) { GoToKnot ("start"); };
-            }
-        } else { // no saved json -> go to "start" knot
-            ES3.DeleteKey (inkStoryObject.storyName + "savedInkStory");
-            InkWriter.main.story.variablesState["debug"] = false;
-            if (mainWriter) { GoToKnot ("start"); };
-        }*/
-        // ADDED THIS FOR TEST
-        InkWriter.main.story.variablesState["debug"] = false;
+        Debug.Log ("Starting story!");
         if (mainWriter) { GoToKnot ("start"); };
-        // END TEST
+        /*
+                HideCanvas (false);
 
-        RefreshView ();
+                if (clearOnNewStory) {
+                    ClearChildren ();
+                }
+
+                lastText = "";
+                lastSaveableTags = "";
+
+                //string savedJson = PlayerPrefs.GetString(inkStoryObject.storyName + "savedInkStory");
+                /*string savedJson = "";
+                if (ES3.KeyExists (inkStoryObject.storyName + "_hasSaved")) {
+                    if (ES3.KeyExists (inkStoryObject.storyName + "savedInkStory")) {
+                        savedJson = ES3.Load<string> (inkStoryObject.storyName + "savedInkStory");
+                    };
+                    if (savedJson != "") {
+                        InkWriter.main.story.state.LoadJson (savedJson);
+                        Debug.Log ("Loading story");
+                        lastText = (string) InkWriter.main.story.variablesState["lastSavedString"];
+                        lastSaveableTags = (string) InkWriter.main.story.variablesState["lastSavedTags"];
+                        Debug.Log ("Tags at load point: " + lastSaveableTags);
+                        loading = true;
+                    } else { // no saved json -> go to "start" knot
+                        InkWriter.main.story.variablesState["debug"] = false;
+                        if (mainWriter) { GoToKnot ("start"); };
+                    }
+                } else { // no saved json -> go to "start" knot
+                    ES3.DeleteKey (inkStoryObject.storyName + "savedInkStory");
+                    InkWriter.main.story.variablesState["debug"] = false;
+                    if (mainWriter) { GoToKnot ("start"); };
+                }
+                // ADDED THIS FOR TEST
+                InkWriter.main.story.variablesState["debug"] = false;
+
+                // END TEST
+
+                //RefreshView ();
+                */
     }
 
     [NaughtyAttributes.Button]
@@ -429,15 +434,15 @@ public class InkWriter : MonoBehaviour {
     }
 
     public void GoToKnot (string knot) {
-        if (GameManager.instance.GameState == GameStates.GAME) {
-            if (clearOnNewStory) {
-                ClearChildren ();
-            }
-            lastText = "";
-            InkWriter.main.story.ChoosePathString (knot);
-            HideCanvas (false);
-            RefreshView ();
-        };
+        //if (GameManager.instance.GameState == GameStates.GAME) {
+        if (clearOnNewStory) {
+            ClearChildren ();
+        }
+        lastText = "";
+        InkWriter.main.story.ChoosePathString (knot);
+        HideCanvas (false);
+        RefreshView ();
+        //};
     }
     public void GoToKnotUnsafe (string knot) {
         if (clearOnNewStory) {

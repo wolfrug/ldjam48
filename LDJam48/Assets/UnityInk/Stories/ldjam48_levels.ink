@@ -1,5 +1,3 @@
-LIST Character = Max, Stevie
-
 // For level inspect stuff
 
 ->endInspect
@@ -8,264 +6,225 @@ LIST Character = Max, Stevie
 ->DONE
 
 //// THIS IS THE TEMPLATE START - NOTE THIS IS LEVEL0, WE DON'T NEED IT
+// adding generic item descriptions below so we have the right descriptive cues on standby.
 ==InspectLevel0
-{Stevie} Hmmm...
 ->endInspect
-=Item1
+=Item1 // Computer on
 {InspectLevel0.Item1<2:
-{Stevie} Curious.
+{Stevie} A computer terminal, I should probably take a look.
 - else:
-{Stevie} I've seen it already.
+{Stevie} This is the computer for this level of the station.
 }
 ->endInspect
-=Item2
+
+=Item2 // Computer off
 {InspectLevel0.Item2<2:
-{Stevie} Huh.
+{Stevie} A computer terminal, but it looks like the screen is dark. Probably non-functional.
 - else:
-{Stevie} Still there.
+{Stevie} Better to try my luck elsewhere.
+}
+->endInspect
+=Item3 //Desk
+{InspectLevel0.Item3<2:
+{Stevie} Hmm, an old desk. But it looks like it's been cleared out.
+- else:
+{Stevie} Anything of interest was removed long ago.
+}
+->endInspect
+=Item4 //Desk paper
+{InspectLevel0.Item4<2:
+{Stevie} Some paper. Could just be scrap, or it could be important.
+- else:
+{Stevie} Discarded paper.
+}
+->endInspect
+=Item5 //Desk tablet
+{InspectLevel0.Item5<2:
+{Stevie} An old tablet. There might be something useful on there, I should take a closer look.
+- else:
+{Stevie} An old tablet.
+}
+->endInspect
+=Item6 // dubious science thing
+{InspectLevel0.Item6<2:
+{Stevie} A leftover device from the lab, looks like it still has a few sample vials in it.
+- else:
+{Stevie} A old piece of lab equiptment.
+}
+->endInspect
+=Item7 // dubious science thing 2
+{InspectLevel0.Item7<2:
+{Stevie} Seems to be some sort of storage tray, or maybe biometric device. 
+- else:
+{Stevie} An old device, left over from the lab.
+}
+->endInspect
+=Item8 //Fungus
+{InspectLevel0.Item8<2:
+{Stevie} What the... are those mushrooms? Growing on the walls. Damn, hopefully there aren't any spores. There's no telling what kind of fungus might be growing down here.
+- else:
+{Stevie} Fungal mould on the walls, probably best to steer clear of it.
+}
+->endInspect
+=Item9 //spigot
+{InspectLevel0.Item9<2:
+{Stevie} Wonder what this spigot was here for. I could try turning it...but no, that could end badly.
+- else:
+{Stevie} Still kinda want to turn it.
+}
+->endInspect
+=Item10 //wall doc
+{InspectLevel0.Item10<2:
+{Stevie} A notice of some kind. What does it say?
+- else:
+{Stevie} Already seen it.
+}
+->endInspect
+=Item11 //wall junk
+{InspectLevel0.Item11<2:
+{Stevie} Strange. Someone pinned up a bunch of paper scraps and pictures. Are they just haphazard desk notes, or something more?
+- else:
+{Stevie} Notes on the wall.
+}
+->endInspect
+=Item12 // Poster
+{InspectLevel0.Item12<2:
+{Stevie} An anotomical poster showing some strange aquatic beast. 
+- else:
+{Stevie} An old poster.
+}
+->endInspect
+=Item13 //jellyfish
+{InspectLevel0.Item13<2:
+{Stevie} Ooh, a jellyfish. It looks so pretty in the dark water. Wouldn't want to go swimming with one though.
+- else:
+{Stevie} A jellyfish, glowing in the dark.
+}
+->endInspect
+=Item14 //Coelacanth
+{InspectLevel0.Item14<2:
+{Stevie} A Coelacanth! Wow, we must be a lot deeper than I realised.
+- else:
+{Stevie} A Coelacanth, drifting outside the window.
+}
+->endInspect
+=Item15 //fish
+{InspectLevel0.Item15<2:
+{Stevie} Come here pretty little fish, and say hello to Aunty Stevie.
+- else:
+{Stevie} The fish isn't in a conversational mood.
+}
+->endInspect
+=Item16 //flesh flower
+{InspectLevel0.Item16<2:
+{Stevie} Oh look, a coral grow---no, are those bones? Shit. It's a ribcage fused with some sort of fleshy flower formation. How did it even get out there? Where did it come from? Who... did it come from?
+- else:
+{Stevie} I'd rather not inspect that too closely.
+}
+->endInspect
+=Item17 //mysterious shape
+{InspectLevel0.Item17<2:
+{Stevie} Is that something drifting out there in the water? A fish? Maybe seaweed? Or...no, let's just stick with the seaweed. 
+- else:
+{Stevie} It's hard to make it out in the murky water, but it's probably nothing.
+}
+->endInspect
+=Item18 //nuclear whale
+{InspectLevel0.Item18<2:
+{Stevie} Is that...? Could that really be...?
+- else:
+{Stevie} It looks almost close enough to touch.
+}
+->endInspect
+
+=Item19 //moon pool
+{InspectLevel0.Item19<2:
+{Stevie} Woah, a moonpool. It's kind of terrifying to think about the fact that the entire ocean is waiting right there through that little opening. Like...right there. All you'd have to do is slip into the water, and you'd be outside.
+- else:
+{Stevie} Don't think about dark waters rising up to crush you. It's fine. It's just a regular pool opening out onto the bottom of the ocean.
+}
+->endInspect
+=Item20 //the window
+{InspectLevel0.Item20<2:
+{Stevie} All this glass, it seems so strange and fragile. One little breach and his whole Station would crumble like a cheap tin can.
+- else:
+{Stevie} If you stare at the window too long, it feels a bit like falling into a vortex. The ocean beyond seems endless.
 }
 ->endInspect
 /// THIS IS THE TEMPLATE END
 
 
 ==InspectLevel1
-
-
 ->endInspect
 =Item1
-//found radio signal
+//computer terminal
 {InspectLevel1.Item1<2:
-{Max} Stevie? Do you copy?
-
-* {Stevie} There you are!
-* {Stevie} Finally!
-
--{Max} What’s up with the signal down there?
-
-*{Stevie} It’s probably just interference, the station hull is pretty thick.
-
--{Max} These old research stations are built like tanks, military engineering at its finest.
-
-*{Stevie} You can say that again.
-
-*{Stevie} Alright, I just need to find a console to reboot the system, and then we’re out of here.
-
--{Max} If there’s nothing nearby, use the elevator and try the second floor. If you need anything I’m just a whisper away. Max out!
-
-*{Stevie} Hey, we agreed! No more stupid sign-off phrases.
-*{Stevie} Such a child...
-
--{Stevie} Maybe I should take a quick look around, there might be something useful. You never know with these old places.
-
+{Stevie} Huh. A computer terminal, but it looks like a basic model. Probably not what we need to gain root access to the system.
+- else:
+{Stevie} I should probably try a different terminal.
 }
+->endInspect
 ->endInspect
 
 =Item2
 {InspectLevel1.Item2<2:
-//Level 1 computer terminal
-{Stevie} Huh. A computer terminal. Wonder if this has what I need.
-{Stevie} Andddd guess not. Lights are on, but nobody is home. 
+//a spigot
+{Stevie} Looks like some kind of pressure valve, I wonder what it was used for.
 - else:
-{Stevie} Yep, still nothing. I'll have to try elsewhere.
+{Stevie} Just an old valve.
 }
 ->endInspect
 
 =Item3
 {InspectLevel1.Item3<2:
-//level one admiring the engineering
-{Stevie} How old is this hulk anyway?
-
-{Max}  Huh, I don’t actually know. Pre-war maybe, but not by much. They were built to analyse the initial Rift anomalies.
-
-*{Stevie} Yeah, I remember.
-*{Stevie} So at least a decade or two. 
-
--{Max} Yep, this is some vintage tech. Can’t believe it’s been that long already.
-
-*{Stevie} We’re getting old.
-*{Stevie} Sometimes it feels like a million years ago.
-    {Stevie} We were different people back then. The world was different.
-
--{Max} Tell me about it.
-
-*{Stevie} Hey. Remember that story Dr. L used to tell in the barracks?
-
--{Max} Uhh...
-
-*{Stevie} You know. About what happens when you mix water and rift radiation.
-
--{Max} Those were just stories, Stevie. 
-
-*{Stevie} Maybe.
-
--{Stevie} But so were trans-dimensional rifts once upon a time, and just look at us now. Besides, who wouldn't want to live forever?
-
--{Max} …
-
-*{Stevie} Max? Still there?
-
--{Max} Yes, I’m still here.Just thinking.
-
-*{Stevie} About what?
-
--{Max} I don't know. I guess... eternity. Yeah, I'm thinking about that.
-
-*{Stevie} Well don't hurt yourself.
-{Max} Har har, very funny. 
-
-*{Stevie} Sorry, I forgot.
-{Stevie} Dr. L was there wasn't she, on the last day, on the beach.
-{Max} Yeah, she was. But it's okay. I'm okay.
-
-**{Stevie} Honest?
-{Max} They're just memories. They can't hurt me now.
-
+//section of wall
+{Stevie} Look at the size of those supports, this place is built like a bunker. Which makes sense I guess. Good for keeping enemies out...and keeping secrets inside.
 - else:
-{Stevie} Look at that machinery. These Research Stations really were built to withstand the apocalypse.
-{Stevie} And I guess they did, in a way.
+{Stevie} Wouldn't want to get trapped in one of these Stations.
 }
 ->endInspect
 
 =Item4
 {InspectLevel1.Item4<2:
-//level one admiring the engineering
-//Bit of wall with tubes?
-{Max} See anything interesting down there?
-
-*{Stevie} Not especially. 
-*{Stevie} So much.
-
-{Stevie} Over here are some tubes. And over there, yep, some more tubes. 
-{Stevie} Why, are you getting bored?
-
--{Max} No way, I’ve got my feet up on the dash, catching up on some light reading of um, oceanic current patterns? It’s riveting. I feel like I’m on a mini-holiday.
-
-*{Stevie} Oooh, oceanic currents. Saucy.
-*{Stevie} Save me a seat would you.
-
--{Max} If you want to join, you’d better hurry up. This storm is starting to theaten my dreams of suntanning on to of the plane.
-
-*{Stevie} Oh trust me, I can’t <i>wait</i> to get out of this suit. 
-{Stevie} Who says we have to wear this things all the time anyway.
-
--{Max} It’s in the manual!
-
-*{Stevie} Manual schmanual. 
- {Stevie} I’m a glorified handyman, not a deep sea diver.
-
-*{Stevie} I know, I know!
-{Stevie} Rule 1: Thou shalt not enter a facility without the appropriate equipment. 
-{Stevie} Rule 2: Thou shalt not proceed below the upper levels of the facility without express permission from Head Office. 
-{Stevie} Rule 3: Thou shalt not--
-
--{Max} --Stevie.
-
-*{Stevie} Yes?
-
-{Max} Shut up and get back to work would you, I’m trying to read important literature over here.
-
-{Stevie} Rude.
+//A notice on the wall
+{Stevie} Huh, looks like an old safety notice. I wonder what they were working on here before the Station was decomissioned. Then again, maybe it's better not knowing.
 - else:
-{Stevie} Yep, the tubes are still there. 
-*{Stevie} Still tubular. 
-**{Stevie} So very, very tubey.
-***{Stevie} Man, I've clearly been breathing pure oxygen for too long. 
+{Stevie} Standard war safety protocols, nothing new to see here.
 }
 ->endInspect
-
 
 
 ==InspectLevel2
 {Stevie} Hmmm...
 ->endInspect
+
 =Item1
-//computer terminal
 {InspectLevel2.Item1<2:
-{Stevie} Alright, I’m here. What next?
-
-{Max} Type in your user code, and then I should be able to access the system remotely from up here.
-
-*{Stevie} Okayyy, done!
-*{Stevie} Easy enough.
-
--{Max} Why hello there my little beauty.
-
-*{Stevie} Stop sweet-talking the machinery.
-
--{Max} But the machinery responds better when I sweet-talk it, every maintenance technician worth their salt knows that.
-
-*{Stevie} Is that right?
-{Max} They’re just like you, Tough on the outside, but--
-**{Stevie} Yeah yeah, Casanova, we get the picture.
-*{Stevie} I manage just fine without it.
-{Max} That’s because you always have me by your side. I smooth out your rough edges.
-**{Stevie} You wish.
-
--*{Stevie} So tell me, what sweet nothings is the system whispering to you now.
-
--{Max} Right now...It’s less a whisper, and more the screams of a depressurising rift-breach. Seriously, ouch. This data is all over the place.
-
-*{Stevie} The other Stations in the area are still giving the all clear?
-
--{Max} Yep, systems nominal - rift radiation in acceptable levels, and even if there was, you’re wearing your adaptive suit. It’s probably just an instrument malfunction. A ghost in the proverbial machine.
-
-*{Stevie} Weird though. We’ve been working this route for what, three years now and it’s the first time anything like this has happened. 
-*{Stevie} The readings are never wrong. Something has to have set it off. 
-
--{Max} *static*... Stevie.
-
-*{Stevie} Yeah?
-
--{Max} Everything is fine. It’s just a computer glitch, I’ll hard reset this baby, and we’ll be back at the Hub in time for dinner, you’ll see.
-
-*{Stevie} Is that a promise?
-*{Stevie} Care to wager on that?
-
--{Max} Just try and stop me. Lukewarm soup rations, and rehydrated crackers here I come.
-
-*{Stevie} You’re an idiot.
-*{Stevie} You’re incorrigible.
-
--{Max} Damn right I am. That’s why you keep me around.
-
+//computer terminal 
+{Stevie} This is probably the access terminal Max mentioned. I should take a closer look and see if I can establish a connection to the Hub console in the seaplane up top.
 - else:
-{Stevie} I've already patched Max in to the network, nothing left to do here.
+{Stevie} This terminal provides a direct link to the Station systems.
 }
+->endInspect
+
+=Item2
+//A poster of a whale
+{InspectLevel2.Item2<2:
+{Stevie} An anatomical post of a...whale? Doesn't look like the whales in the history books, that's for sure. But what do I know.
+- else:
+{Stevie} Yep, seen that already. Still doesn't look right.
+}
+->endInspect
 
 
 =Item3
-//Bit of wall with tubes?
-{InspectLevel2.Item2<2:
-{Max} See anything interesting down there?
-
-8{Stevie} Not especially. Just tubes. And over there, yep, some more tubes. You getting bored up there?
-
-{Max} No way, I’ve got my feet up on the dash, catching up on some light reading of um, oceanic current patterns. It’s riveting. I feel like I’m on a mini-holiday.
-
-*{Stevie} Oooh, oceanic currents. Saucy.
-*{Stevie} Save me a seat would you.
-
-{Max} If you want to join, you’d better hurry up. 
-
-*{Stevie} Oh trust me, I can’t <i>wait</i> to get out of this suit. Who says we have to wear this things all the time anyway.
-
-{Max} It’s in the manual!
-
-*{Stevie} Manual schmanual. 
- {Stevie} I’m a glorified handyman, not a deep sea diver.
-*{Stevie} I know, I know!
-{Stevie} Rule #1 -Thou shalt not enter a facility without the appropriate equipment. 
-{Stevie} Rule #2 - Thou shalt not proceed below the upper levels of the facility without express permission from Head Office. 
-{Stevie} Rule #3--!
-
-{Max} Stevie.
-
-{Stevie} Yes, Max?
-
-{Max} Shut up and get back to work would you, I’m trying to read over here.
-
-{Stevie} Rude.
+//A section of wall/ceiling with cables or tubes
+{InspectLevel2.Item3<2:
+{Stevie} So many tubes and cables up there. The processing power of this place must have been off the charts. It's almost a pity they shut it all done. It's just a glorified weather station now.
 - else:
-{Stevie} Yep, the tubes are still there. Still tubular. 
+{Stevie} This place must have been pretty impressive back in the day.
 }
 ->endInspect
+
+
+

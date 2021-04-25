@@ -1,5 +1,49 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6492159317965927675
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3950523732567366295}
+  - component: {fileID: 8083120557113483136}
+  m_Layer: 7
+  m_Name: Sound
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3950523732567366295
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6492159317965927675}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1130416547834230973}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8083120557113483136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6492159317965927675}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56a9f0b64005b864b80c2519708f257a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundToPlay: DoorOpen
 --- !u!1001 &6420608407164054641
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -143,6 +187,41 @@ PrefabInstance:
       propertyPath: interactions.Array.data[0]
       value: 3100
       objectReference: {fileID: 0}
+    - target: {fileID: 6244978142319449293, guid: 59fac846e91b8ac4cae3f1a76e533822,
+        type: 3}
+      propertyPath: openedObjectEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6244978142319449293, guid: 59fac846e91b8ac4cae3f1a76e533822,
+        type: 3}
+      propertyPath: openedObjectEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6244978142319449293, guid: 59fac846e91b8ac4cae3f1a76e533822,
+        type: 3}
+      propertyPath: openedObjectEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 8083120557113483136}
+    - target: {fileID: 6244978142319449293, guid: 59fac846e91b8ac4cae3f1a76e533822,
+        type: 3}
+      propertyPath: openedObjectEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6244978142319449293, guid: 59fac846e91b8ac4cae3f1a76e533822,
+        type: 3}
+      propertyPath: openedObjectEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PlaySound
+      objectReference: {fileID: 0}
+    - target: {fileID: 6244978142319449293, guid: 59fac846e91b8ac4cae3f1a76e533822,
+        type: 3}
+      propertyPath: openedObjectEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: FMOD_AnimationSoundHelper, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6244978142319449293, guid: 59fac846e91b8ac4cae3f1a76e533822,
+        type: 3}
+      propertyPath: openedObjectEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 6244978142319449295, guid: 59fac846e91b8ac4cae3f1a76e533822,
         type: 3}
       propertyPath: m_Name
@@ -151,6 +230,12 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 6244978141993996200, guid: 59fac846e91b8ac4cae3f1a76e533822, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 59fac846e91b8ac4cae3f1a76e533822, type: 3}
+--- !u!4 &1130416547834230973 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6244978142319449292, guid: 59fac846e91b8ac4cae3f1a76e533822,
+    type: 3}
+  m_PrefabInstance: {fileID: 6420608407164054641}
+  m_PrefabAsset: {fileID: 0}
 --- !u!212 &1130416547891241949 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 6244978141993996204, guid: 59fac846e91b8ac4cae3f1a76e533822,

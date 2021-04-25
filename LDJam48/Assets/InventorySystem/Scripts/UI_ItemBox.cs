@@ -115,6 +115,7 @@ public class UI_ItemBox : MonoBehaviour {
     void ParseItemData () { // parses the item data and sets stuff accordingly
         tooltip.IsActive = false;
         SetDraggable (false);
+        consumable = false;
         foreach (ItemTrait trait in data.m_traits) {
             switch (trait) {
                 case ItemTrait.HAS_TOOLTIP:

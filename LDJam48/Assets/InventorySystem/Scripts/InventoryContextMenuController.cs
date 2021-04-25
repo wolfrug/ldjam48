@@ -93,6 +93,8 @@ public class InventoryContextMenuController : MonoBehaviour {
                             parentController.DestroyBox (tryItem);
                         }
                         itemConsumedEvent.Invoke (itemData, consumeSelf);
+                    } else if (itemData.m_minimumNeededToConsume <= 0) { // consumable forever
+                        itemConsumedEvent.Invoke (itemData, itemData.m_minimumNeededToConsume);
                     }
                     break;
                 }

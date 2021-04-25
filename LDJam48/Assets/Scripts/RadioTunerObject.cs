@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class RadioTuned : UnityEvent<RadioTunerObject> { }
 
 public class RadioTunerObject : MonoBehaviour {
+    public string tunerId = "tuningTest";
     public FMOD_Controller tunerController;
     [SerializeField]
     private bool active = true;
@@ -15,7 +16,6 @@ public class RadioTunerObject : MonoBehaviour {
     private float currentValue = 0f;
     public bool invokeOnce = true;
     private bool invoked = false;
-    public string knotTarget = "tuningTest";
     public Animator gaugeAnimator;
     public Button radioButton;
     public RadioTuned tunedEvent;
@@ -58,9 +58,16 @@ public class RadioTunerObject : MonoBehaviour {
     }
 
     void RunKnot () {
-        InkWriter.main.GoToKnot (knotTarget);
+        InkWriter.main.GoToKnot (tunerId);
         Active = false;
         DeactivateButton ();
+    }
+
+    public void SetTunerID () {
+        InkWriter.main.story.variablesState["tunerID"] = tunerId;
+    }
+    public void DesetTunerID () {
+        InkWriter.main.story.variablesState["tunerID"] = "";
     }
 
     public bool Active {

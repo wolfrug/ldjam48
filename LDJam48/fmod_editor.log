@@ -10,13 +10,344 @@
 [LOG] DownMix::init                            : done.
 [LOG] Thread::initThread                       : Init FMOD stream thread. Affinity: 0x8000000000000003, Priority: 0xFFFF7FFB, Stack Size: 98304, Semaphore: No, Sleep Time: 10, Looping: Yes.
 [LOG] Thread::initThread                       : Init FMOD mixer thread. Affinity: 0x8000000000000001, Priority: 0xFFFF7FFA, Stack Size: 81920, Semaphore: No, Sleep Time: 0, Looping: Yes.
-[LOG] AsyncManager::init                       : manager 000001F4943A9618 isAsync 0 updatePeriod 0.02
+[LOG] AsyncManager::init                       : manager 000001F4943AEE08 isAsync 0 updatePeriod 0.02
 [LOG] AsyncManager::init                       : done
 [LOG] PlaybackSystem::init                     : 
 [LOG] Thread::initThread                       : Init FMOD Studio sample load thread. Affinity: 0x8000000000000003, Priority: 0xFFFF7FFD, Stack Size: 98304, Semaphore: No, Sleep Time: 1, Looping: No.
 [LOG] PlaybackSystem::init                     : done
 [LOG] Thread::initThread                       : Init FMOD Studio bank load thread. Affinity: 0x8000000000000003, Priority: 0xFFFF7FFD, Stack Size: 98304, Semaphore: No, Sleep Time: 1, Looping: No.
 [LOG] Manager::init                            : done.
+[LOG] Manager::readBank                        : fileversion = 125, compatVersion = 119 (oldest = 44, newest = 135)
+[LOG] PlaybackSystem::acquireMasterBus         : Setting master channel group format to 3
+[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
+[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             : exinfo->length             = 12957152
+[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 34464
+[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 00000026637FF2C8
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFD881A7B10
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFD881A7AE0
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFD881A7BE0
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFD881A7CA0
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 000001F5C04E7598
+[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
+[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
+[LOG] SystemI::createSoundInternal             : Sample 0/1: name='AMB_Silo_BG_Noise_Bang-01', format=5, channels=1, frequency=48000, lengthbytes=119392, lengthpcm=239094, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.861575.
+[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
+[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             : exinfo->length             = 12957152
+[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 34464
+[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 00000026637FF2C8
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFD881A7B10
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFD881A7AE0
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFD881A7BE0
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFD881A7CA0
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 000001F5C04E7598
+[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
+[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
+[LOG] SystemI::createSoundInternal             : Sample 0/1: name='AMB_Silo_BG_waterdrop-07', format=5, channels=1, frequency=48000, lengthbytes=128160, lengthpcm=239152, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.026428.
+[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
+[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             : exinfo->length             = 12957152
+[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 34464
+[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 00000026637FF2C8
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFD881A7B10
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFD881A7AE0
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFD881A7BE0
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFD881A7CA0
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 000001F5C04E7598
+[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
+[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
+[LOG] SystemI::createSoundInternal             : Sample 0/1: name='AMB_Silo_BG_Noise_Bang-05', format=5, channels=1, frequency=48000, lengthbytes=211200, lengthpcm=401256, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.505354.
+[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
+[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             : exinfo->length             = 12957152
+[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 34464
+[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 00000026637FF2C8
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFD881A7B10
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFD881A7AE0
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFD881A7BE0
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFD881A7CA0
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 000001F5C04E7598
+[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
+[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
+[LOG] SystemI::createSoundInternal             : Sample 0/1: name='AMB_Silo_BG_waterdrop-02', format=5, channels=1, frequency=48000, lengthbytes=256032, lengthpcm=475585, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.099568.
+[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
+[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             : exinfo->length             = 12957152
+[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 34464
+[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 00000026637FF2C8
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFD881A7B10
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFD881A7AE0
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFD881A7BE0
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFD881A7CA0
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 000001F5C04E7598
+[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
+[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
+[LOG] SystemI::createSoundInternal             : Sample 0/1: name='AMB_Silo_BG_Noise_Bang-07', format=5, channels=1, frequency=48000, lengthbytes=222112, lengthpcm=426214, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.572229.
+[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
+[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             : exinfo->length             = 12957152
+[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 34464
+[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 00000026637FF2C8
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFD881A7B10
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFD881A7AE0
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFD881A7BE0
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFD881A7CA0
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 000001F5C04E7598
+[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
+[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
+[LOG] SystemI::createSoundInternal             : Sample 0/1: name='AMB_Silo_BG_waterdrop-04', format=5, channels=1, frequency=48000, lengthbytes=101248, lengthpcm=186837, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.076378.
+[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
+[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             : exinfo->length             = 12957152
+[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 34464
+[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 00000026637FF2C8
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFD881A7B10
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFD881A7AE0
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFD881A7BE0
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFD881A7CA0
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 000001F5C04E7598
+[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
+[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
+[LOG] SystemI::createSoundInternal             : Sample 0/1: name='AMB_Silo_BG_Noise_Bang-02', format=5, channels=1, frequency=48000, lengthbytes=118688, lengthpcm=224467, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.133153.
+[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
+[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             : exinfo->length             = 12957152
+[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 34464
+[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 00000026637FF2C8
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFD881A7B10
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFD881A7AE0
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFD881A7BE0
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFD881A7CA0
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 000001F5C04E7598
+[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
+[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
+[LOG] SystemI::createSoundInternal             : Sample 0/1: name='heavy sheet metal low groan 13', format=5, channels=2, frequency=48000, lengthbytes=338688, lengthpcm=370780, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=1.000000.
+[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
+[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             : exinfo->length             = 12957152
+[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 34464
+[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 00000026637FF2C8
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFD881A7B10
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFD881A7AE0
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFD881A7BE0
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFD881A7CA0
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 000001F5C04E7598
+[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
+[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
+[LOG] SystemI::createSoundInternal             : Sample 0/1: name='AMB_Silo_BG_waterdrop-06', format=5, channels=1, frequency=48000, lengthbytes=105600, lengthpcm=198387, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.047085.
+[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
+[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             : exinfo->length             = 12957152
+[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 34464
+[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 00000026637FF2C8
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFD881A7B10
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFD881A7AE0
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFD881A7BE0
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFD881A7CA0
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 000001F5C04E7598
+[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
+[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
+[LOG] SystemI::createSoundInternal             : Sample 0/1: name='AMB_Silo_BG_Noise_Bang-08', format=5, channels=1, frequency=48000, lengthbytes=89216, lengthpcm=180203, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.851303.
+[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
+[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             : exinfo->length             = 12957152
+[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 34464
+[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 00000026637FF2C8
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFD881A7B10
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFD881A7AE0
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFD881A7BE0
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFD881A7CA0
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 000001F5C04E7598
+[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
+[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
+[LOG] SystemI::createSoundInternal             : Sample 0/1: name='AMB_Silo_BG_waterdrop-05', format=5, channels=1, frequency=48000, lengthbytes=94048, lengthpcm=175967, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.052513.
+[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
+[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             : exinfo->length             = 12957152
+[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 34464
+[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 00000026637FF2C8
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFD881A7B10
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFD881A7AE0
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFD881A7BE0
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFD881A7CA0
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 000001F5C04E7598
+[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
+[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
+[LOG] SystemI::createSoundInternal             : Sample 0/1: name='AMB_Silo_BG_Noise_Bang-04', format=5, channels=1, frequency=48000, lengthbytes=146112, lengthpcm=276543, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.138377.
+[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
+[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             : exinfo->length             = 12957152
+[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 34464
+[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 00000026637FF2C8
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFD881A7B10
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFD881A7AE0
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFD881A7BE0
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFD881A7CA0
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 000001F5C04E7598
+[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
+[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
+[LOG] SystemI::createSoundInternal             : Sample 0/1: name='AMB_Silo_BG_Noise_Bang-06', format=5, channels=1, frequency=48000, lengthbytes=154304, lengthpcm=298313, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.667965.
+[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
+[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             : exinfo->length             = 12957152
+[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 34464
+[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 00000026637FF2C8
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFD881A7B10
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFD881A7AE0
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFD881A7BE0
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFD881A7CA0
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 000001F5C04E7598
+[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
+[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
+[LOG] SystemI::createSoundInternal             : Sample 0/1: name='AMB_Silo_BG_waterdrop-03', format=5, channels=1, frequency=48000, lengthbytes=125376, lengthpcm=233037, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.065168.
+[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
+[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             : exinfo->length             = 12957152
+[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 34464
+[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 00000026637FF2C8
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFD881A7B10
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFD881A7AE0
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFD881A7BE0
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFD881A7CA0
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 000001F5C04E7598
+[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
+[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
+[LOG] SystemI::createSoundInternal             : Sample 0/1: name='AMB_Silo_BG_Noise_Bang-03', format=5, channels=1, frequency=48000, lengthbytes=188128, lengthpcm=357054, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.136668.
+[LOG] SystemI::createSound                     : filename = FmodProject/LDJam48/Build/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] Thread::initThread                       : Init FMOD nonblocking thread (0). Affinity: 0x8000000000000003, Priority: 0xFFFF7FFC, Stack Size: 114688, Semaphore: Yes, Sleep Time: 0, Looping: Yes.
+[LOG] SystemI::createSound                     : setdata soundi = 000001F497279738 : node = 000001F48F9895E0
+[LOG] SystemI::createSound                     : add node to async list : head = 000001F556F659A8.  list count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001F497279738
+[LOG] SystemI::createSoundInternal             :     Create name='FmodProject/LDJam48/Build/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 12957152
+[LOG] SystemI::createSound                     :     filename = FmodProject/LDJam48/Build/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 34464
+[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000001F48F9896F0
+[LOG] SystemI::createSound                     :     setdata soundi = 000001F49727B238 : node = 000001F48FBB2030
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSound                     :     add node to async list : head = 000001F556F659A8.  list count = 0
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='AMB_Silo_BG_Noise_Reverb', format=5, channels=1, frequency=48000, lengthbytes=703136, lengthpcm=1350705, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.149583.
+[LOG] Thread::initThread                       :     Init FMOD file thread. Affinity: 0x8000000000000003, Priority: 0xFFFF7FFC, Stack Size: 49152, Semaphore: No, Sleep Time: 10, Looping: Yes.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001F497279738
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001F49727B238
+[LOG] SystemI::createSoundInternal             :     Create name='FmodProject/LDJam48/Build/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 12957152
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 34464
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000001F48FBB2140
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='AMB_Silo_BG_waterdrop-01', format=5, channels=1, frequency=48000, lengthbytes=321376, lengthpcm=590405, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.118281.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001F49727B238
+[LOG] SystemI::createSound                     : filename = FmodProject/LDJam48/Build/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] SystemI::createSound                     : setdata soundi = 000001F497278148 : node = 000001F48FBB2170
+[LOG] SystemI::createSound                     : add node to async list : head = 000001F556F659A8.  list count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001F497278148
+[LOG] SystemI::createSoundInternal             :     Create name='FmodProject/LDJam48/Build/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 12957152
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 34464
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000001F48FBB2280
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='AMB_Silo_BG_Noise_Reverb', format=5, channels=1, frequency=48000, lengthbytes=703136, lengthpcm=1350705, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.149583.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001F497278148
+[LOG] SoundI::release                          : AMB_Silo_BG_waterdrop-01 (000001F49727B238)
+[LOG] SoundI::release                          :     AMB_Silo_BG_waterdrop-01 (000001F51E0A3578)
+[LOG] SoundI::release                          :     AMB_Silo_BG_waterdrop-01 (000001F51E133608)
+[LOG] SoundI::release                          : AMB_Silo_BG_Noise_Reverb (000001F497279738)
+[LOG] SoundI::release                          :     AMB_Silo_BG_Noise_Reverb (000001F51E0A0E78)
+[LOG] SoundI::release                          :     AMB_Silo_BG_Noise_Reverb (000001F51E132888)
+[LOG] SoundI::release                          :  (000001F498BE00A8)
+[LOG] SoundI::release                          :     AMB_Silo_BG_waterdrop-02 (000001F493ADDC08)
+[LOG] SoundI::release                          :  (000001F498BE0D98)
+[LOG] SoundI::release                          :     AMB_Silo_BG_waterdrop-03 (000001F51E0A2058)
+[LOG] SoundI::release                          :  (000001F498BDD868)
+[LOG] SoundI::release                          :     AMB_Silo_BG_waterdrop-04 (000001F493ADC888)
+[LOG] SoundI::release                          :  (000001F498BDD9D8)
+[LOG] SoundI::release                          :     AMB_Silo_BG_waterdrop-05 (000001F493ADC208)
+[LOG] SoundI::release                          :  (000001F498BE0218)
+[LOG] SoundI::release                          :     heavy sheet metal low groan 13 (000001F493ADC068)
+[LOG] SoundI::release                          :  (000001F498BE0668)
+[LOG] SoundI::release                          :     AMB_Silo_BG_waterdrop-06 (000001F493ADD0A8)
+[LOG] SoundI::release                          :  (000001F498BDFC58)
+[LOG] SoundI::release                          :     AMB_Silo_BG_waterdrop-07 (000001F493ADCBC8)
+[LOG] SoundI::release                          :  (000001F498BDFAE8)
+[LOG] SoundI::release                          :     AMB_Silo_BG_Noise_Bang-01 (000001F493ADDA68)
+[LOG] SoundI::release                          :  (000001F498BDFDC8)
+[LOG] SoundI::release                          :     AMB_Silo_BG_Noise_Bang-02 (000001F493ADDDA8)
+[LOG] SoundI::release                          :  (000001F498BE0F08)
+[LOG] SoundI::release                          :     AMB_Silo_BG_Noise_Bang-03 (000001F51E0A04B8)
+[LOG] SoundI::release                          :  (000001F498BDEDF8)
+[LOG] SoundI::release                          :     AMB_Silo_BG_Noise_Bang-04 (000001F493ADC3A8)
+[LOG] SoundI::release                          :  (000001F498BE07D8)
+[LOG] SoundI::release                          :     AMB_Silo_BG_Noise_Bang-05 (000001F493ADCD68)
+[LOG] SoundI::release                          :  (000001F498BE0AB8)
+[LOG] SoundI::release                          :     AMB_Silo_BG_Noise_Bang-06 (000001F493ADC548)
+[LOG] SoundI::release                          :  (000001F498BDD6F8)
+[LOG] SoundI::release                          :     AMB_Silo_BG_Noise_Bang-07 (000001F493ADCF08)
+[LOG] SoundI::release                          :  (000001F498BDE9A8)
+[LOG] SoundI::release                          :     AMB_Silo_BG_Noise_Bang-08 (000001F493ADD248)
+[LOG] SoundI::release                          : AMB_Silo_BG_Noise_Reverb (000001F497278148)
+[LOG] SoundI::release                          :     AMB_Silo_BG_Noise_Reverb (000001F51E0A1698)
+[LOG] SoundI::release                          :     AMB_Silo_BG_Noise_Reverb (000001F556F40598)
 [LOG] Thread::callback                         : FMOD Studio bank load thread finished.
 [LOG] Thread::callback                         : FMOD Studio sample load thread finished.
 [LOG] LiveUpdate::release                      : 
@@ -24,3 +355,5 @@
 [LOG] Thread::callback                         : FMOD stream thread finished.
 [LOG] Thread::callback                         : FMOD mixer thread finished.
 [LOG] SystemI::close                           : Closed.
+[LOG] Thread::callback                         : FMOD nonblocking thread (0) finished.
+[LOG] Thread::callback                         : FMOD file thread finished.

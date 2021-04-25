@@ -9,6 +9,8 @@ LIST characters = Sadie, George, Ashley, Peter, Egroeg
 
 LIST items = test1, fuel_battery
 
+VAR tunerID = ""
+
 EXTERNAL CheckHasItem(x,y)
 EXTERNAL ConsumeItem(x,y)
 EXTERNAL AddItem(x,y)

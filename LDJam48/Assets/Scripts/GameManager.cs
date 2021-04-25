@@ -313,5 +313,11 @@ public class GameManager : MonoBehaviour {
         Debug.Log ("Current oxygen to be added: " + maxOxygen + " percentage: " + amountPercentage);
         SurvivalManager.instance.SpawnHealthEffect (DamageType.OXYGEN, maxOxygen / 2f, 2f);
     }
+    public void StartRegularOxygenLoss (float dps = 0.01f) {
+        SurvivalManager.instance.StartPermanentEffect (DamageType.OXYGEN, -dps, 1f, "oxygenLoss");
+    }
+    public void StopRegularOxygenLoss () {
+        SurvivalManager.instance.StopPermanentEffect ("oxygenLoss");
+    }
 
 }

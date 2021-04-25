@@ -856,6 +856,11 @@ PrefabInstance:
       propertyPath: activateDistance
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 1130416547834230972, guid: f75c29f4c01cd1d4faed561115838136,
+        type: 3}
+      propertyPath: openedObjectEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1130416547834230973, guid: f75c29f4c01cd1d4faed561115838136,
         type: 3}
       propertyPath: m_RootOrder
@@ -947,6 +952,11 @@ PrefabInstance:
         type: 3}
       propertyPath: activateDistance
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1130416547834230972, guid: f75c29f4c01cd1d4faed561115838136,
+        type: 3}
+      propertyPath: openedObjectEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1130416547834230973, guid: f75c29f4c01cd1d4faed561115838136,
         type: 3}

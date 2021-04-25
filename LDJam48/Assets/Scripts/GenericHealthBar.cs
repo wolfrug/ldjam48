@@ -1,7 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
+
+[System.Serializable]
+public class HealthPercentage : UnityEvent<float> { }
 
 public class GenericHealthBar : MonoBehaviour {
     public Image healthBar;
@@ -10,6 +14,7 @@ public class GenericHealthBar : MonoBehaviour {
     public Animator animator;
     [SerializeField]
     private float m_currentHealth = 1f;
+    public HealthPercentage healthListener;
     // Start is called before the first frame update
     void Start () {
 
@@ -35,5 +40,6 @@ public class GenericHealthBar : MonoBehaviour {
         if (animator != null) {
             animator.SetFloat ("percentage", healthPercentage);
         }
+        healthListener.Invoke (healthPercentage);
     }
 }

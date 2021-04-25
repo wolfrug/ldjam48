@@ -27,6 +27,16 @@ Om nom.
 ==finishRadio
 ->DONE
 
+==TryRadio
+{tunerID:
+-"tuningTest":
+Woop! It works! You found it!
+->finishRadio
+- else:
+You can't pick anything up.
+}
+->finishRadio
+
 ==inspectTest
 It's a thingie. Yay!
 ->DONE

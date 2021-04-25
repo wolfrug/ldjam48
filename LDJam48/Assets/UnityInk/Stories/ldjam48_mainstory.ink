@@ -8,7 +8,7 @@ INCLUDE ldjam48_radiotalks.ink
 // Default main story object - always have a stitch named ==start
 
 {debug:
-->InteractableLevel0.Interact1
+->RadioLevel1.Talk
 }
 
 ==start

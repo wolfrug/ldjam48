@@ -18,30 +18,55 @@
 ->finishRadio
 =Talk
 {Talk<2:
-{Stevie} Max? Do you copy?
+{Max} Stevie? Do you copy?
 
-{Max} Stevie, finally! What’s up with the signal done there?
+{Stevie} There you are!
 
-{Stevie} Eh, who knows. 
+{Stevie} Finally!
 
-{Stevie} These old research stations are built like tanks, it’s probably just interference from the hull.
+{Max} What’s up with the signal down there?
 
-{Max} Pre-war engineering at it’s finest.
+{Stevie} It’s probably just interference, the station hull is pretty thick.
+
+{Max} These old research stations are built like tanks, military engineering at its finest.
 
 {Stevie} You can say that again.
 
-{Max} Well whatever you do, do it fast. Looks like a storm is browning, and you know how those get this close to the Rift.
+{Stevie} Alright, I just need to find a console to reboot the system, and then we’re out of here.
 
-{Stevie} Just need to find a console to reboot the system, and then we’re out of here.
+{Max} If there’s nothing nearby, use the elevator and try the second floor. If you need anything I’m just a whisper away. Max out!
 
-{Max} Alright partner, there should be an access point on the second floor. 
+{Stevie} Hey, we agreed! No more stupid sign-off phrases.
 
-{Max} Try the elevator, and if you need anything I’m just a whisper away. Max out!
+{Stevie} Such a child...
 
-{Stevie} Heh, idiot. 
+{Stevie} Maybe I should take a quick look around first, there might be something useful. You never know with these old places.
+
+-else:
+{Talk<3:
+{Stevie} Er...Max?
+
+{Max} Yeah?
+
+{Stevie} What am I looking for again?
+
+{Max} What are you…? You mean, the...elevator for accessing level 2. 
+
+{Stevie} Yeah, that. 
+
+{Stevie} Thanks!
+
+{Max} Are you okay there, Stevie? Suit pressure levels stable? Feeling lightheaded?
+
+{Stevie} Oh, shut up.
+
+{Max} *distorted laughter*
 - else:
-{Voice} Still here.
-{Stevie} Neat.
+{Stevie} Max, I hate to ask again but...
+
+{Max} Stevie, c’mon. Maybe you really <i>should</i> check your pressure levels. Just go to level 2, already." 
+<color=green>[Click the icon next to where you started to enter the elevator, and then select level 2.]</color>
+}
 }
 ->finishRadio
 

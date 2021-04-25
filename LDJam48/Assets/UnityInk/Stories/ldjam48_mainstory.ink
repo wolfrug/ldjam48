@@ -50,3 +50,7 @@ I made the background sprite a little darker, did you notice?.
 ==inspect_level2_test2
 There's nothing else to do now.
 ->finishRadio
+
+==tuningTest
+The radio is tuned! Success!
+->finishRadio

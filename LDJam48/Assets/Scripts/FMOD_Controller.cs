@@ -11,7 +11,19 @@ public class FMOD_Controller : MonoBehaviour {
     public float currentValue = 10;
     public float currentEffectiveValue;
     public StudioEventEmitter emitter;
+    [SerializeField]
+    private bool m_active = true;
     // Start is called before the first frame update
+
+    public bool Active {
+        get {
+            return m_active;
+        }
+        set {
+            m_active = value;
+            emitter.enabled = value;
+        }
+    }
     void Awake () {
         //if (emitter == null) { emitter = GetComponent<StudioEventEmitter> (); };
     }
@@ -29,8 +41,10 @@ public class FMOD_Controller : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        currentEffectiveValue = Mathf.Lerp (minValue, maxValue, currentValue);
-        emitter.SetParameter (valueName, currentEffectiveValue);
+        if (Active) {
+            currentEffectiveValue = Mathf.Lerp (minValue, maxValue, currentValue);
+            emitter.SetParameter (valueName, currentEffectiveValue);
+        }
     }
 
 }

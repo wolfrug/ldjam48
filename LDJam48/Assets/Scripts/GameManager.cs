@@ -37,7 +37,6 @@ public class GameManager : MonoBehaviour {
     private GameState currentState;
     public float lateInitWait = 0.1f;
     private Dictionary<GameStates, GameState> gameStateDict = new Dictionary<GameStates, GameState> { };
-    // Start is called before the first frame update
     private BasicAgent player;
     private InventoryController m_playerInventory;
 
@@ -276,6 +275,7 @@ public class GameManager : MonoBehaviour {
     }
 
     public void AddItem (ItemData item) {
+        Doozy.Engine.GameEventMessage.SendEvent ("ShowPlayerInventory");
         PlayerInventory.AddItem (item, 1);
     }
 

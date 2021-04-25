@@ -13,15 +13,15 @@ INCLUDE ldjam48_radiotalks.ink
 
 ==start
 
-{Max} Hello? Did you make it *skrr* … *skrrr* okay?
+{Max} Hello? Did you make it *skrr* … *skrrr* okay? {VoiceClip("MaxVoice1")}
 
 {Stevie} Max? You’re breaking up.
 
-{Max} *skrr* reception is shot *whine skrr* storm coming…
+{Max} *skrr* reception is shot *whine skrr* storm coming… {VoiceClip("MaxVoice2")}
 
 {Stevie} Figures.
 
-{Max} *skrrrr*
+{Max} *skrrrr* {VoiceClip("MaxVoice3")}
 
 {Stevie} All right. I need to find a spot with better reception.
 

@@ -18,6 +18,7 @@ VAR Voice = "<color=purple>Voice:</color>"
 EXTERNAL CheckHasItem(x,y)
 EXTERNAL ConsumeItem(x,y)
 EXTERNAL AddItem(x,y)
+EXTERNAL VoiceClip(x)
 
 ==function Consume(item, amount)==
 {CheckItem(item, amount)>=amount:
@@ -39,6 +40,9 @@ EXTERNAL AddItem(x,y)
 
 ===function CheckHasItem(itemName, returnVar)===
 ~checkItem = 2
+
+===function VoiceClip(id)===
+[Play Voice clip {id}]
 
 ===function ConvertToString(targetItem)===
 // Add more items to this list as needed

@@ -322,11 +322,15 @@ public class GameManager : MonoBehaviour {
     public void StopRegularOxygenLoss () {
         SurvivalManager.instance.StopPermanentEffect ("oxygenLoss");
     }
-    public void ShowElevatorButtons(){
+    public void ShowElevatorButtons () {
         Doozy.Engine.GameEventMessage.SendEvent ("ShowElevatorButtons");
     }
-    public void HideElevatorButtons(){
+    public void HideElevatorButtons () {
         Doozy.Engine.GameEventMessage.SendEvent ("HideElevatorButtons");
+    }
+    public void PlayVoiceOver (object[] inputVariables) {
+        string id = inputVariables[0] as string;
+        AudioManager.instance.PlaySFX (id);
     }
 
 }

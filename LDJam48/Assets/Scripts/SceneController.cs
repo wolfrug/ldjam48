@@ -6,6 +6,7 @@ using UnityEngine;
 public class SceneController : MonoBehaviour {
     public static SceneController instance;
     public List<SceneObject> sceneParents;
+    public SceneObject startScene;
     public int currentScene;
 
     void Awake () {
@@ -17,7 +18,11 @@ public class SceneController : MonoBehaviour {
     }
 
     public void Init () {
-        SetScene (currentScene);
+        SetScene (startScene);
+    }
+
+    public void SetScene (SceneObject target) {
+        SetScene (target, SceneEntrance.Default);
     }
 
     public bool SetScene (SceneObject target, SceneEntrance entrance = SceneEntrance.Default) {
@@ -36,6 +41,7 @@ public class SceneController : MonoBehaviour {
         if (index > 0 || index < sceneParents.Count) {
             GameEventMessage.SendEvent ("HideScene");
             StartCoroutine (LoadScene (index, entrance));
+            currentScene = index;
             return true;
         } else {
             Debug.LogWarning ("Tried to load invalid scene index: " + index);
@@ -77,6 +83,14 @@ public class SceneController : MonoBehaviour {
             }
         }
         sceneParents[currentScene].ActivateSelf ();
+    }
+
+    [NaughtyAttributes.Button]
+    void GetAllSceneObjects () {
+        sceneParents.Clear ();
+        foreach (SceneObject so in FindObjectsOfType<SceneObject> ()) {
+            sceneParents.Add (so);
+        }
     }
 
     // Update is called once per frame

@@ -98,7 +98,7 @@ public class SceneObject : MonoBehaviour {
             Vector3 start;
             Vector3 end = Vector3.zero;
             Color color = Color.blue;
-            if (entrance.connectsTo != null) {
+            if (entrance.connectsTo != null && entrance.active) {
                 start = entrance.door.transform.position;
                 foreach (Entrance targetEntrance in entrance.connectsTo.entrances) {
                     if (targetEntrance.connectsTo == this) {

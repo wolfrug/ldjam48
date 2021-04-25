@@ -322,5 +322,11 @@ public class GameManager : MonoBehaviour {
     public void StopRegularOxygenLoss () {
         SurvivalManager.instance.StopPermanentEffect ("oxygenLoss");
     }
+    public void ShowElevatorButtons(){
+        Doozy.Engine.GameEventMessage.SendEvent ("ShowElevatorButtons");
+    }
+    public void HideElevatorButtons(){
+        Doozy.Engine.GameEventMessage.SendEvent ("HideElevatorButtons");
+    }
 
 }

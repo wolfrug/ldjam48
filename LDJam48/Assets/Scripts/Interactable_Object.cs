@@ -83,13 +83,13 @@ public class Interactable_Object : MonoBehaviour {
     }
 
     public void RightClickOn (GenericClickable clickable) {
-        if (hasContextMenu && !leftClickContextMenu) {
+        if (hasContextMenu && !leftClickContextMenu && GameManager.instance.GameState == GameStates.GAME) {
             GenericContextMenu.GetMenuOfType (ContextMenuType.WORLD).PopulateDropDownDefaults (ConvertInteractionsToContextMenuEntries (), gameObject);
             //GameManager.instance.StopPlayerMovement (true);
         };
     }
     public void LeftClickOn (GenericClickable clickable) {
-        if (hasContextMenu && leftClickContextMenu) {
+        if (hasContextMenu && leftClickContextMenu && GameManager.instance.GameState == GameStates.GAME) {
             GenericContextMenu.GetMenuOfType (ContextMenuType.WORLD).PopulateDropDownDefaults (ConvertInteractionsToContextMenuEntries (), gameObject);
             //GameManager.instance.StopPlayerMovement (true);
         };
@@ -243,7 +243,7 @@ public class Interactable_Object : MonoBehaviour {
                         }
                     case Interactions.LOOK_AT:
                         {
-                            if (inspectKnotName != "") {
+                            if (inspectKnotName != "" && GameManager.instance.GameState != GameStates.NARRATIVE) {
                                 InkWriter.main.GoToKnot (inspectKnotName);
                             }
                             break;

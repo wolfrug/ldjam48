@@ -57,6 +57,10 @@ EXTERNAL AddItem(x,y)
 <>{not debug:
 \[useButton.{buttonName}]
 }
+===function DisableButton()===
+<>{not debug:
+\[disable\]
+}
 ===function UseText(textName)===
 <>{not debug:
 \[useText.{textName}]

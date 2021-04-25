@@ -66,6 +66,8 @@ public class InkWriter : MonoBehaviour {
 
     public bool clearOnNewStory = true;
     public bool clearAfterEveryChoice = false;
+    public bool cacheClearedChoices = false;
+    public bool scrollContinually = true;
     private bool continueStory = true;
     private bool autoContinueNext = false;
 
@@ -84,6 +86,8 @@ public class InkWriter : MonoBehaviour {
     private Button pickedButton;
     private string lastText;
     private string lastSaveableTags;
+
+    private Choice lastButtonClicked;
 
     // Make this array larger as more tags are added; currently portrait is saved in 0 and background in 1
     private string[] tagsToSave = new string[2] { "", "" };
@@ -177,7 +181,6 @@ public class InkWriter : MonoBehaviour {
         for (int i = 0; i < tagsToSave.Length; i++) {
             tagsToSave[i] = "";
         }
-        ES3.DeleteKey (inkStoryObject.storyName + "_hasSaved");
         if (!Application.isPlaying) {
             //PlayerPrefs.SetString(inkStoryObject.storyName + "savedInkStory", "");
             ES3.DeleteKey (inkStoryObject.storyName + "savedInkStory");
@@ -185,10 +188,10 @@ public class InkWriter : MonoBehaviour {
             int childCount = textArea.transform.childCount;
             for (int i = childCount - 1; i >= 0; --i) {
                 GameObject.Destroy (textArea.transform.GetChild (i).gameObject);
+                cachedButtons.Clear ();
             }
             //PlayerPrefs.SetString(inkStoryObject.storyName + "savedInkStory", "");
             ES3.DeleteKey (inkStoryObject.storyName + "savedInkStory");
-
             DisablePortraits ();
             DisableBackgrounds ();
             StartStory ();
@@ -228,6 +231,7 @@ public class InkWriter : MonoBehaviour {
         // Read all the content until we can't continue any more
         while (InkWriter.main.story.canContinue) {
             // Continue gets the next line of the story
+            MoveScrollBar (true);
             yield return new WaitUntil (() => continueStory);
             CreateText ();
         }
@@ -238,24 +242,50 @@ public class InkWriter : MonoBehaviour {
         if (clickToContinue) { ActivateContinueButton (false); };
         // Display all the choices, if there are any!
         if (InkWriter.main.story.currentChoices.Count > 0) {
+            bool alreadySelectedButton = false;
+
             for (int i = 0; i < InkWriter.main.story.currentChoices.Count; i++) {
                 Choice choice = InkWriter.main.story.currentChoices[i];
-                Button button = CreateChoiceView (choice.text.Trim ());
+                Button button = CreateChoiceView (choice);
+                if (clearAfterEveryChoice && lastButtonClicked != null && !alreadySelectedButton) {
+                    if (choice.index == lastButtonClicked.index) {
+                        Debug.Log ("Choice same as before, selecting");
+                        button.Select ();
+                        alreadySelectedButton = true;
+                        lastButtonClicked = null;
+                    }
+                }
                 // Tell the button what to do when we press it - also delete potential previous listeners
                 button.onClick.RemoveAllListeners ();
-                button.onClick.AddListener (delegate {
-                    OnClickChoiceButton (choice, button);
-                });
-                // add button to cached button dictionary [nope -> added in CreateChoiceView instead]
-                //cachedButtons.Add(button);
-            }
-            // Select the first -active- cached button to allow for navigation with keyboard
-            foreach (Button button in cachedButtons) {
-                if (button.interactable) {
-                    button.Select ();
-                    break;
+                // First try to find an InkButton
+                InkButton tryButton = button.gameObject.GetComponent<InkButton> ();
+                if (tryButton != null) { // inkbutton found - we listen to its onclick instead!
+                    button.onClick.AddListener (delegate {
+                        tryButton.onClicked (choice, button, this);
+                        DelayedOnClickChoiceButton (button, tryButton);
+                    });
+                } else {
+                    button.onClick.AddListener (delegate {
+                        OnClickChoiceButton (choice, button);
+                    });
                 }
             }
+            // Deactivate all non-used cached buttons
+            if (cacheClearedChoices) {
+                for (int i = InkWriter.main.story.currentChoices.Count; i < cachedButtons.Count; i++) {
+                    cachedButtons[i].gameObject.SetActive (false);
+                }
+            }
+
+            // Select the first -active- cached button to allow for navigation with keyboard
+            if (!alreadySelectedButton) {
+                foreach (Button button in cachedButtons) {
+                    if (button.interactable) {
+                        button.Select ();
+                        break;
+                    }
+                }
+            };
         }
         // If we've read all the content and there's no choices, the story is finished!
         else {
@@ -264,11 +294,7 @@ public class InkWriter : MonoBehaviour {
                 if (hideWhenFinished) {
                     HideCanvas (true);
                 } else { // PROBABLY CHANGE THIS LOL.
-                    Button choice = CreateChoiceView ("This is a terrible bug. Everything is broken. Click here to restart.");
-                    cachedButtons.Add (choice);
-                    choice.onClick.AddListener (delegate {
-                        ResetStory ();
-                    });
+                    Debug.LogWarning ("EVERYTHING IS BROKEN THIS SHOULD NEVER HAPPEN OH MY GOD");
                 }
             } else {
                 if (hideWhenFinished) {
@@ -285,19 +311,31 @@ public class InkWriter : MonoBehaviour {
         MoveScrollBar (true);
     }
 
-    // When we click the choice button, tell the story to choose that choice!
-    void OnClickChoiceButton (Choice choice, Button button) {
-
-        lastText = "";
-        InkWriter.main.story.ChooseChoiceIndex (choice.index);
+    // Called from the InkButton!
+    public void DelayedOnClickChoiceButton (Button button, InkButton inkbutton) { // Removes or disables children on click
         pickedButton = button;
-        RefreshView ();
-
+        if (inkbutton.removeButtonsOnClick) {
+            RemoveChildren ();
+        } else if (inkbutton.disableButtonsOnClick) {
+            foreach (Button btn in cachedButtons) { // Just disable them
+                btn.interactable = false;
+            }
+        }
+    }
+    // When we click the choice button, tell the story to choose that choice!
+    public void OnClickChoiceButton (Choice choice, Button button) {
+        if (GameManager.instance.GameState == GameStates.NARRATIVE) {
+            lastText = "";
+            InkWriter.main.story.ChooseChoiceIndex (choice.index);
+            pickedButton = button;
+            lastButtonClicked = choice;
+            RefreshView ();
+        };
     }
     void OnClickContinueButton () {
-
-        continueStory = true;
-
+        if (GameManager.instance.GameState == GameStates.NARRATIVE) {
+            continueStory = true;
+        };
     }
 
     void CreateText () {
@@ -324,7 +362,7 @@ public class InkWriter : MonoBehaviour {
                 {
                     continueStory = false;
                     ActivateContinueButton (true);
-                } else if (autoContinueNext && story.canContinue) {
+                } else if (autoContinueNext && InkWriter.main.story.canContinue) {
                     autoContinueNext = false;
                 } else {
                     continueStory = false;
@@ -424,17 +462,16 @@ public class InkWriter : MonoBehaviour {
     public void LoadStory () {
         StartStory ();
     }
-    void PauseStory () {
+    void PauseStory () { // THIS FUNCTION IS NON-FUNCTIONAL, BECAUSE WHEN WOULD YOU EVER PAUSE??
         SaveStory ();
         //RemoveChildren ();
-        Button choice = CreateChoiceView ("Continue Story");
-        choice.onClick.AddListener (delegate {
-            StartStory ();
-        });
+        //Button choice = CreateChoiceView ("Continue Story");
+        //choice.onClick.AddListener (delegate {
+        //    StartStory ();
+        //});
     }
 
     public void GoToKnot (string knot) {
-        //if (GameManager.instance.GameState == GameStates.GAME) {
         if (clearOnNewStory) {
             ClearChildren ();
         }
@@ -442,12 +479,17 @@ public class InkWriter : MonoBehaviour {
         InkWriter.main.story.ChoosePathString (knot);
         HideCanvas (false);
         RefreshView ();
-        //};
     }
     public void GoToKnotUnsafe (string knot) {
         if (clearOnNewStory) {
             ClearChildren ();
         }
+        lastText = "";
+        InkWriter.main.story.ChoosePathString (knot, false);
+        HideCanvas (false);
+        RefreshView ();
+    }
+    public void GoToKnotNoClear (string knot) {
         lastText = "";
         InkWriter.main.story.ChoosePathString (knot, false);
         HideCanvas (false);
@@ -462,6 +504,7 @@ public class InkWriter : MonoBehaviour {
         if (!writerVisible) {
             Debug.LogWarning ("Writer is not visible for " + gameObject, gameObject);
             HideCanvas (false);
+            GameManager.instance.GameState = GameStates.NARRATIVE;
         };
         RefreshView ();
     }
@@ -469,19 +512,48 @@ public class InkWriter : MonoBehaviour {
     void ClearChildren () {
         int childCount = textArea.transform.childCount;
         for (int i = childCount - 1; i >= 0; --i) {
-            GameObject.Destroy (textArea.transform.GetChild (i).gameObject);
+            GameObject targetObj = textArea.transform.GetChild (i).gameObject;
+            if (cacheClearedChoices) {
+                foreach (Button btn in cachedButtons) {
+                    if (btn.gameObject == targetObj) {
+                        //btn.gameObject.SetActive (false);
+                        targetObj = null;
+                        break;
+                    }
+                }
+            };
+            if (targetObj != null) {
+                GameObject.Destroy (targetObj);
+            };
         }
         if (textArea != optionsArea) {
             childCount = optionsArea.transform.childCount;
             for (int i = childCount - 1; i >= 0; --i) {
-                GameObject.Destroy (optionsArea.transform.GetChild (i).gameObject);
+                GameObject targetObj = optionsArea.transform.GetChild (i).gameObject;
+                if (cacheClearedChoices) {
+                    foreach (Button btn in cachedButtons) {
+                        if (btn.gameObject == targetObj) {
+                            // btn.gameObject.SetActive (false);
+                            targetObj = null;
+                            break;
+                        }
+                    }
+                };
+                if (targetObj != null) {
+                    GameObject.Destroy (targetObj);
+                };
             }
         }
     }
 
     // Creates a piece of text
-    void CreateContentView (string text, Transform parent) {
-        TextMeshProUGUI storyText = FindExistingText (text);
+    public void CreateContentView (string text, Transform parent, bool ignoreUseText = false) {
+        TextMeshProUGUI storyText = null;
+        if (!ignoreUseText) {
+            storyText = FindExistingText (text);
+        } else {
+            text = CleanExistingText (text);
+        }
         if (storyText == null) {
             storyText = Instantiate (textPrefab) as TextMeshProUGUI;
             storyText.text = text;
@@ -491,31 +563,42 @@ public class InkWriter : MonoBehaviour {
         TMP_LinkWatcher linkWatcher = storyText.gameObject.GetComponent<TMP_LinkWatcher> ();
         if (linkWatcher != null) {
             linkWatcher.linkClickedEvent.RemoveAllListeners ();
-            linkWatcher.linkClickedEvent.AddListener ((arg) => linkClickedEvent.Invoke (arg));
+            linkWatcher.linkClickedEvent.AddListener ((arg0) => linkClickedEvent.Invoke (arg0));
         };
     }
     public void DebugAThing (string debugtext) {
         Debug.LogWarning (debugtext);
     }
     // Creates a button showing the choice text
-    Button CreateChoiceView (string text) {
-        Button choice = FindExistingButton (text); // Finds an existing button
-        if (choice == null) {
+    Button CreateChoiceView (Choice choice) {
+        string text = choice.text.Trim ();
+        Button choiceButton = FindExistingButton (text); // Finds an existing button
+        TextMeshProUGUI choiceText;
+        Tuple<bool, string> editedText = ChoiceIsInteractable (text);
+        if (choiceButton == null) {
             // Creates the button from a prefab
-            choice = Instantiate (buttonPrefab) as Button;
-            choice.transform.SetParent (optionsArea.transform, false);
+            if (!cacheClearedChoices || choice.index >= cachedButtons.Count) {
+                choiceButton = Instantiate (buttonPrefab) as Button;
+                choiceButton.transform.SetParent (optionsArea.transform, false);
+                // Add it to the list of created buttons for later deletion - found buttons are not added!
+                cachedButtons.Add (choiceButton);
+            } else {
+                choiceButton = cachedButtons[choice.index];
+                choiceButton.gameObject.SetActive (true);
+            }
             // Gets the text from the button prefab
-            TextMeshProUGUI choiceText = choice.GetComponentInChildren<TextMeshProUGUI> ();
-            choiceText.text = text;
-            // Add it to the list of created buttons for later deletion - found buttons are not added!
-            cachedButtons.Add (choice);
-        };
-        choice.interactable = ChoiceIsInteractable (text);
+            choiceText = choiceButton.GetComponentInChildren<TextMeshProUGUI> ();
+            choiceText.text = editedText.Item2;
+        } else {
+            // We clear the text of stuff like [disabled]
+            choiceButton.GetComponentInChildren<TextMeshProUGUI> ().text = CleanButtonText (choiceButton.GetComponentInChildren<TextMeshProUGUI> ().text);
+        }
+        choiceButton.interactable = editedText.Item1;
         // Make the button expand to fit the text
         //HorizontalLayoutGroup layoutGroup = choice.GetComponent<HorizontalLayoutGroup> ();
         //layoutGroup.childForceExpandHeight = false;
 
-        return choice;
+        return choiceButton;
     }
 
     [NaughtyAttributes.Button]
@@ -553,6 +636,40 @@ public class InkWriter : MonoBehaviour {
         };
         return returnValue;
     }
+    string CleanExistingText (string text) {
+        string returnValue = text;
+        Regex brackets = new Regex (@"(?<=\[).+?(?=\])");
+        MatchCollection matches = brackets.Matches (text);
+        if (matches.Count > 0) {
+            for (int i = 0; i < matches.Count; i++) { // does it contain the text 'useButton'?
+                //                Debug.Log(matches[i].Value);
+                if (matches[i].Value.Contains ("useText.")) {
+                    // If so, remove the useButton part, then try to find the button named what's left
+                    string searchTerm = matches[i].Value.Replace ("useText.", "");
+                    // Neat, let's clean the text and set it! (note that we do not care if it's interactable or not)
+                    string newText = text.Replace (matches[i].Value, "").Replace ("[]", "");
+                    returnValue = newText;
+                    //                           Debug.Log("Found text and changed its text to " + newText);
+                    break;
+                }
+            }
+        }
+        return returnValue;
+    }
+    string CleanButtonText (string text) {
+        string returnValue = text;
+        Regex brackets = new Regex (@"(?<=\[).+?(?=\])");
+        MatchCollection matches = brackets.Matches (text);
+        if (matches.Count > 0) {
+            for (int i = 0; i < matches.Count; i++) { // does it contain the text 'useButton'?
+                string newText = text.Replace (matches[i].Value, "").Replace ("[]", "");
+                returnValue = newText;
+                //                           Debug.Log("Found text and changed its text to " + newText);
+                break;
+            }
+        }
+        return returnValue;
+    }
 
     Button FindExistingButton (string text) { // Attempts to find an existing button already in the scene based on the text on the button (if there is a text on the button)
         Button returnValue = null;
@@ -585,9 +702,10 @@ public class InkWriter : MonoBehaviour {
         return returnValue;
     }
 
-    bool ChoiceIsInteractable (string text) { // Checks to see if the choice should be interactable or not by reading a (x out of x) text in it
+    Tuple<bool, string> ChoiceIsInteractable (string text) { // Checks to see if the choice should be interactable or not by reading a (x out of x) text in it
 
         bool returnValue = true;
+        string returnString = text;
         // Checks for anything between delimiter brackets and then sends the first match onward.
         Regex brackets = new Regex (@"(?<=\[).+?(?=\])");
         MatchCollection matches = brackets.Matches (text);
@@ -596,8 +714,16 @@ public class InkWriter : MonoBehaviour {
                 // Split by '/' into two
                 string[] parts = matches[i].Value.Split ('/');
                 if (parts.Length < 2) {
-                    Debug.Log ("Could not split into two with /, presumably not what we're looking for. Quitting.");
-                    return true;
+                    // We check if the text is simply 'disable' in which case we return false, but with cleaned up text
+                    if (parts.Length == 1) {
+                        if (parts[0] == "disable") {
+                            //Debug.Log ("Found 'disable' text on button, disabling button and cleaning! " + text);
+                            returnString = CleanButtonText (text);
+                            return new Tuple<bool, string> (false, returnString);
+                        }
+                    }
+                    //   Debug.Log ("Could not split into two with /, presumably not what we're looking for. Quitting.");
+                    return new Tuple<bool, string> (true, text);
                 }
                 for (int z = 0; z < 2; z++) { // remove everything after spaces...
                     string[] newParts = parts[z].Split (' ');
@@ -618,26 +744,32 @@ public class InkWriter : MonoBehaviour {
                 }
             }
         };
-        return returnValue;
+        return new Tuple<bool, string> (returnValue, text);
     }
 
     // Destroys all the children of this gameobject (all the UI)
-    void RemoveChildren () {
+    public void RemoveChildren () {
         /*int childCount = textArea.transform.childCount;
 		for (int i = childCount - 1; i >= 0; --i) {
 			GameObject.Destroy (textArea.transform.GetChild (i).gameObject);
 		}*/
         foreach (Button btn in cachedButtons) {
             if (btn != pickedButton) {
-                GameObject.Destroy (btn.gameObject);
+                if (cacheClearedChoices) {
+                    //btn.gameObject.SetActive (false);
+                } else {
+                    GameObject.Destroy (btn.gameObject);
+                };
             };
         }
 
         if (pickedButton != null) {
-            pickedButton.targetGraphic.color = pickedButton.colors.highlightedColor;
+            //pickedButton.targetGraphic.color = pickedButton.colors.highlightedColor;
             pickedButton.interactable = false;
         };
-        cachedButtons.Clear ();
+        if (!cacheClearedChoices) {
+            cachedButtons.Clear ();
+        };
         pickedButton = null;
     }
 
@@ -653,11 +785,12 @@ public class InkWriter : MonoBehaviour {
         //GameManager.instance.PauseGame (!hide);
         //allow switching between Game and Narrative, but not between other states
         if (mainWriter) {
-            if (hide && switchToGame) {
+            if (hide && GameManager.instance.GameState == GameStates.NARRATIVE && switchToGame) {
                 Debug.Log ("Returning to gamestate.", gameObject);
                 GameEventMessage.SendEvent ("EndNarrative");
                 GameManager.instance.SetState (GameStates.GAME);
-            } else if (!hide) {
+
+            } else if (!hide && GameManager.instance.GameState != GameStates.NARRATIVE) {
                 Debug.Log ("Starting narrative.", gameObject);
                 GameEventMessage.SendEvent ("StartNarrative");
                 GameManager.instance.SetState (GameStates.NARRATIVE);
@@ -667,7 +800,7 @@ public class InkWriter : MonoBehaviour {
         } else {
             // Non-main canvases cannot switch out of narrative - only the mainWriter can
             if (!hide) {
-                Debug.Log ("Showing non-main writer");
+                GameManager.instance.SetState (GameStates.NARRATIVE);
             } else {
                 Debug.Log ("Hiding non-main writer.");
             }
@@ -690,11 +823,25 @@ public class InkWriter : MonoBehaviour {
         }
     }
 
-    void Update () {
-        if (scrollView != null) {
-            if (scrollView.verticalNormalizedPosition > 0f && autoScroll) {
-                scrollView.verticalNormalizedPosition = -0.01f;
+    void LateUpdate () {
+        /*if (scrollView != null && writerVisible) {
+            if ((scrollView.verticalNormalizedPosition > 0f && autoScroll) || (scrollView.verticalNormalizedPosition > 0f && scrollContinually)) {
+                scrollView.verticalNormalizedPosition = Time.deltaTime * -0.01f;
+                if (!continueStory) {
+                    scrollView.verticalNormalizedPosition = 0f;
+                }
             } else if (scrollView.verticalNormalizedPosition <= 0f && autoScroll) {
+                autoScroll = false;
+            }
+        }*/
+        if (scrollView != null && writerVisible) {
+            if ((scrollView.verticalScrollbar.value > 0f && autoScroll) || (scrollView.verticalScrollbar.value > 0f && scrollContinually)) {
+                scrollView.verticalScrollbar.value -= Time.deltaTime * 0.9f;
+                if (scrollView.verticalScrollbar.value <= 0f) {
+                    scrollView.verticalScrollbar.value = 0f;
+                    autoScroll = false;
+                }
+            } else if (scrollView.verticalScrollbar.value <= 0f && autoScroll) {
                 autoScroll = false;
             }
         }
@@ -720,44 +867,70 @@ public class InkWriter : MonoBehaviour {
         if (tags.Contains ("changebackground")) {
             DisableBackgrounds ();
         }
+        if (tags.Contains ("advancedSkillCheck")) { // do not continue here, continue elsewhere!
+            // Debug.Log ("Advanced skill check received!");
+            StopCoroutine (refreshCoroutine);
+            //HideCanvas(true);
+            returnValue = false;
+            GameEventMessage.SendEvent ("OpenSkillCheckWriter");
+        }
+        if (tags.Contains ("endAdvSkillCheck")) {
+            //Debug.Log ("Advanced skill check end received!");
+            StopCoroutine (refreshCoroutine);
+            HideCanvas (true);
+            returnValue = false;
+        }
         if (tags.Contains ("startSay")) {
-            Debug.Log ("Starting say.");
+            //Debug.Log ("Starting say.");
             StopCoroutine (refreshCoroutine);
             //HideCanvas(true);
             returnValue = false;
             GameEventMessage.SendEvent ("OpenDialogueWriter");
         }
         if (tags.Contains ("endSay")) {
-            Debug.Log ("Ending say.");
+            // Debug.Log ("Ending say.");
             StopCoroutine (refreshCoroutine);
             HideCanvas (true);
             returnValue = false;
             // Add the said text to the main content window!
-            InkWriter.main.CreateContentView (lastText.Replace ("\n", "") + "\n\n", InkWriter.main.textArea.transform);
+            InkWriter.main.CreateContentView ("<b>" + lastText.Replace ("\n", "") + "</b>" + "\n\n", InkWriter.main.textArea.transform, true);
             lastText = "";
         }
         if (tags.Contains ("characterCreationStart")) { // do not continue here, continue elsewhere!
             Debug.Log ("Character creation check received!");
-            StopCoroutine (refreshCoroutine);
-            HideCanvas (true, false);
-            returnValue = false;
+            //StopCoroutine (refreshCoroutine);
+            //HideCanvas (true, false);
+            //returnValue = false;
             GameEventMessage.SendEvent ("OpenCharacterCreatorWriter");
         }
         if (tags.Contains ("characterCreationEnd")) {
             Debug.Log ("Character creation check end received!");
+            //StopCoroutine (refreshCoroutine);
+            //HideCanvas (true);
+            returnValue = false;
+        }
+        if (tags.Contains ("workerAssignmentStart")) { // do not continue here, continue elsewhere!
+            Debug.Log ("Worker assignment check received!");
+            StopCoroutine (refreshCoroutine);
+            HideCanvas (true, false);
+            returnValue = false;
+            GameEventMessage.SendEvent ("OpenWorkerAssignerWriter");
+        }
+        if (tags.Contains ("workerAssignmentEnd")) {
+            Debug.Log ("Worker assignment end check received!");
             StopCoroutine (refreshCoroutine);
             HideCanvas (true);
             returnValue = false;
         }
         if (tags.Contains ("openJournal")) { // do not continue here, continue elsewhere!
-            Debug.Log ("Opening journal!");
+            // Debug.Log ("Opening journal!");
             StopCoroutine (refreshCoroutine);
             HideCanvas (true, false);
             returnValue = false;
             GameEventMessage.SendEvent ("OpenJournalWriter");
         }
         if (tags.Contains ("closeJournal")) {
-            Debug.Log ("Closing journal!");
+            // Debug.Log ("Closing journal!");
             StopCoroutine (refreshCoroutine);
             HideCanvas (true, false);
             //Invoke ("HideCanvasInvoke", 0.5f);

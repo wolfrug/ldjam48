@@ -19,7 +19,7 @@
 =Talk
 {Talk<2:
 
-{Max} Stevie? Do you copy?
+{Max} Stevie? Do you copy?  {VoiceClip("MaxVoice3")}
 
 {Stevie} There you are!
 
@@ -96,19 +96,19 @@
 ->finishRadio
 }
 
-{Voice}  *skrr* … *skrrr* … <i>Hello?</i>
+{Voice}  *skrr* … *skrrr* … <i>Hello?</i> {VoiceClip("Voice1")}
 
 {Stevie} What...
 
 {Stevie} Gah, stupid radio is fritzing again. Max! Can you hear me?
 
-{Voice} I *skrrrr*... you *skr*.
+{Voice} I *skrrrr*... you *skr*. {VoiceClip("Voice2")}
 
-{Voice} Please... *skrrr*... help.
+{Voice} Please... *skrrr*... help. {VoiceClip("Voice3")}
 
 {Stevie} Max, this isn’t funny...
 
-{Voice} We’re still down here ....*skrrrr* … Come and find us. <zzt>
+{Voice} We’re still down here ....*skrrrr* … Come and find us. <zzt> {VoiceClip("Voice4")}
 
 {Stevie} What the…
 
@@ -201,7 +201,7 @@
 
 {Stevie} Hello…? <i>Am I crazy? Maybe this is crazy, I--
 
-{Voice} *whine skrik* You c…*skrr*... Hello.
+{Voice} *whine skrik* You c…*skrr*... Hello. {VoiceClip("Voice5")}
 
 {Max} Holy shit.
 
@@ -209,11 +209,11 @@
 
 {Stevie} Just tell me where you are and I’ll come and get you.
 
-{Voice} *skkrik*... down… *skrr*
+{Voice} *skkrik*... down… *skrr* {VoiceClip("Voice6")}
 
 {Stevie} Down, on level 4?
 
-{Voice} *schhhrrr* … no….*skrr*... deeper. Follow the sig…*static*.
+{Voice} *schhhrrr* … no….*skrr*... deeper. Follow the sig…*static*. {VoiceClip("Voice7")}
 
 {Max} Damn, looks like the signal has faded out again.
 
@@ -316,14 +316,73 @@
 ->finishRadio
 
 ==RadioLevel6
-{Max} Hmm...
-->finishRadio
 =Talk
 {Talk<2:
-{Voice} Hey Stevie again.
-{Stevie} Wooow again.
-- else:
-{Voice} Still here.
-{Stevie} Neat. Cool.
+
+{Stevie} Oh. You’re…
+
+{Voice} Not what you were expecting?
+
+{Stevie} No. No I suppose not.
+
+{Stevie} You’re one of… I mean, you’re a…
+
+{Voice} Rifter?
+
+{Stevie} Huh. Yeah. That.
+
+{Stevie} I just realised I’ve never seen one of you without a Riftsuit before. You’re so…
+
+{Voice} Human?
+
+{Stevie} They told us you were monsters. 
+
+{Voice} Yes. Our side said the same about you. I suppose we were both lied to, about a lot of things.
+
+{Stevie} That dead scientist. The Station. They kept you here? They...tested...you?
+
+{Voice} That’s a very polite way of putting it. We started off as an exploratory expedition, scientists, diplomats. A hand offered in friendship across the Rift.
+
+{Stevie} No that’s not--
+
+{Voice} You’re wrong. In more ways than you could possibly know.
+
+{Voice} There used to be more of us. We were scheduled for removal but Alexei--Dr. Kovach--he had a crisis of faith. He wanted to fix the terrible wrongs,he had done, so he hid us and stayed behind.
+
+{Voice} But some things can’t be fixed. In the end the radiation killed him, and he barred himself away behind closed doors. And now I’m the last one to go.
+
+{Stevie} You’re dying?
+
+{Voice} Changing. Becoming something new. But I didn’t want to go without passing on the truth.
+
+{Voice} The Rift is spreading, and your leaders know it. That’s why they shut down the stations - to contain, and to control, you, and everyone like you.
+
+{Stevie} No. There’s no way...I’d know.
+
+{Voice} They feed you the information they want you to see, but the truth is still there, under the surface. Like me. Like the whales. It’s there if you’d only take the time to look.
+
+{Voice} You can’t outrun the inevitable. The radiation is everywhere. It’s in the water, in the ground, in the very air you breathe. 
+
+{Voice} But it doesn’t have to be the end… for any of us.
+
+{Stevie} I don’t understand. What am I supposed to do?
+
+{Voice} Whatever your heart tells you. The truth is here if you want it, on Dr Kovacs flash drive. You could tell the world the truth. Expose the lie. 
+
+{Voice} Or you could do what we did, and embrace the change.
+
+{Voice} Whatever you decide we'll still be here in the depths, waiting. 
+
+{Voice} Goodbye, Stevie.
+
+#animateRifter
+
+{Stevie} No, wait! I still have…
+
+{Stevie}... questions. 
+{AddElevatorLevel(Level0)}
+{Stevie} I’d better head back. Max will be worried sick. But first, the flashdrive. Should I take it, or not?
+-else:
+{Stevie} ...
 }
 ->finishRadio

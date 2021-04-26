@@ -22,7 +22,7 @@ INCLUDE ldjam48_lootables.ink
 
 {Stevie} Figures.
 
-{Max} *skrrrr* {VoiceClip("MaxVoice3")}
+{Max} *skrrrr* {VoiceClip("MaxVoice4")}
 
 {Stevie} All right. I need to find a spot with better reception.
 
@@ -57,9 +57,12 @@ INCLUDE ldjam48_lootables.ink
 ->finishRadio
 
 ==EndGame
+{RadioLevel6.Talk>0:
+#bestWin
+}
+{died:
 {Stevie} Oh thank god. Air.
 
-{died:
 {Max} You complete tosser.
 
 {Max} You had me worried. I had to come haul your blue-faced butt out of there myself.
@@ -71,11 +74,7 @@ INCLUDE ldjam48_lootables.ink
 ->WinGame
 }
 
-{RadioLevel6.Talk>0:
-We talked to the last lady.
-->WinGame
-}
-
+{OpenElevator.GoToLevel3<1:
 {Max} I'm glad you decided to come back up.
 
 {Stevie} We had a job to do and I did it.
@@ -85,6 +84,34 @@ We talked to the last lady.
 {Max} No need to tell me twice. Let's get up in the air. I've been promised gruel!
 
 {Stevie} Yes. Who wants adventures, anyway.
+->WinGame
+}
+
+{Stevie} Oh thank god. Fresh air. Next time I want to do something like that, please talk me out of it.
+
+{Max} I mean, I told you so. You just don’t listen.
+
+{Stevie} I listen.
+
+{Max} Literally never. Not once.
+
+{Stevie} Oh hush. 
+
+{Max} So what happens now? 
+
+{Stevie} Well to start with, we fly home and get some of that dinner I was promised.
+
+{Stevie} After that… I don’t really know.
+
+{Max} Tell me about it on the way?
+
+{RadioLevel6.Talk>0:
+{Stevie} I don’t really know where to begin, but I’ll do my best.
+->WinGame
+}
+
+{Stevie} Sounds good, partner. 
+
 ->WinGame
 
 =WinGame

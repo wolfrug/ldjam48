@@ -21,7 +21,7 @@ VAR elevatorBlocked = false
 ==OpenElevator
 #autoContinue
 #openelevator
-{UseText("ObjectiveList")}To do:<br>-Stuff.<br>-And things.
+{UseText("ObjectiveList")}To do:<br>-Get Max into mainframe.<br>-Flip some switches.
 #autoContinue
 {accessLevels?Level0 && currentLevel !=Level0:
 + [{UseButton("Level0")} Exit Hatch]
@@ -72,8 +72,8 @@ VAR elevatorBlocked = false
 + [{DisableButton()}{UseButton("Level6")} Moonpool]
 ->CloseElevator
 }
-+ [(Cheat) Add all levels.]
-->AddAllElevator->OpenElevator
+//+ [(Cheat) Add all levels.]
+//->AddAllElevator->OpenElevator
 * {elevatorBlocked && CheckItem(item_crowbar, 1)} [Pry open door]
 {Stevie} Here goes nothing...
 

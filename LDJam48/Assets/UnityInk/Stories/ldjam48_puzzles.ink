@@ -426,6 +426,7 @@ Debug which puzzle?
 {not Complete1:
 {Stevie} Right. Here goes nothing.
 * [Turn the spigot]
+#spigot1
 {Stevie} All right. Something is definitely happening.
 ->Complete1
 - else:
@@ -443,6 +444,7 @@ Debug which puzzle?
 {not Complete2:
 {Stevie} Rusty. But not too rusty yet. I think.
 * [Turn the spigot]
+#spigot2
 {Stevie} That definitely turned something on.
 ->Complete2
 - else:
@@ -461,6 +463,7 @@ Debug which puzzle?
 {not Complete3:
 {Stevie} I guess this is the one. Let's see if it turns.
 * [Turn the spigot]
+#spigot3
 {Stevie} I hope the machinery can handle it...
 ->Complete3
 - else:
@@ -487,6 +490,9 @@ Debug which puzzle?
 
 {CheckItem(item_wrench, 1):
 {Stevie} Luckily I don't come unprepared.
+* [Turn the spigot with wrench]
+#spigot4
+{Stevie} Hah! Take that!
 ->Complete4
 - else:
 {Stevie} Well shit. I am going to need leverage.

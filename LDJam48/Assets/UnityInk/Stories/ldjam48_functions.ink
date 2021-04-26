@@ -7,7 +7,9 @@ VAR checkItem = -1
 
 LIST characters = Sadie, George, Ashley, Peter, Egroeg
 
-LIST items = test1, fuel_battery
+LIST items = item_battery, item_keycard, item_walkietalkie, item_crowbar, item_smalloxygen, item_knife, item_tape, item_note, item_diode, item_none
+
+VAR debugInventory = item_walkietalkie
 
 VAR tunerID = ""
 
@@ -29,7 +31,7 @@ EXTERNAL VoiceClip(x)
 ===function Add(item, amount)===
 {AddItem(ConvertToString(item), amount)}
 ==function AddItem(item, amount)===
-{Add(item, amount)}
+~debugInventory += item
 ==function CheckItem(item, amount)==
 // Helper function
 {CheckHasItem(ConvertToString(item), "checkItem")}
@@ -39,23 +41,65 @@ EXTERNAL VoiceClip(x)
 (Attempted consumption of {amount} {itemName})
 
 ===function CheckHasItem(itemName, returnVar)===
-~checkItem = 2
+{debugInventory?ConvertToItem(itemName):
+~checkItem = 1
+- else:
+~checkItem = 0
+}
 
 ===function VoiceClip(id)===
 [Play Voice clip {id}]
 
 ===function ConvertToString(targetItem)===
 // Add more items to this list as needed
-~temp returnVar = ""
+~temp returnVar = item_none
 {targetItem:
-- test1:
-~returnVar = "test1"
-- fuel_battery:
-~returnVar = "fuel_battery"
+- item_battery:
+~returnVar = "item_battery"
+- item_keycard:
+~returnVar = "item_keycard"
+- item_walkietalkie:
+~returnVar = "item_walkietalkie"
+- item_crowbar:
+~returnVar = "item_crowbar"
+- item_tape:
+~returnVar = "item_tape"
+- item_knife:
+~returnVar = "item_knife"
+- item_smalloxygen:
+~returnVar = "item_smalloxygen"
+- item_note:
+~returnVar = "item_note"
+- item_diode:
+~returnVar = "item_diode"
 }
 // and return
 ~return returnVar
 
+==function ConvertToItem(targetItemString)===
+~temp returnVar = item_note
+{targetItemString:
+- "item_battery":
+~returnVar = item_battery
+- "item_keycard":
+~returnVar = item_keycard
+- "item_walkietalkie":
+~returnVar = item_walkietalkie
+- "item_crowbar":
+~returnVar = item_crowbar
+- "item_tape":
+~returnVar = item_tape
+- "item_knife":
+~returnVar = item_knife
+- "item_smalloxygen":
+~returnVar = item_smalloxygen
+- "item_note":
+~returnVar = item_note
+- "item_diode":
+~returnVar = item_diode
+}
+// and return
+~return returnVar
 
 ===function UseButton(buttonName)===
 <>{not debug:

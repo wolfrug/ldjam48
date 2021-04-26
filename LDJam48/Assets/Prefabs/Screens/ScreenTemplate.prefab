@@ -96,6 +96,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 936421077781004955}
+  targetSpriteRenderer: {fileID: 0}
+  sortingDifferenceToTarget: -1
   useUpdate: 1
 --- !u!1 &2936840060209810600
 GameObject:
@@ -1041,6 +1043,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 1150783966699059288}
+  targetSpriteRenderer: {fileID: 0}
+  sortingDifferenceToTarget: -1
   useUpdate: 1
 --- !u!1001 &429235528398012994
 PrefabInstance:
@@ -1067,7 +1071,7 @@ PrefabInstance:
     - target: {fileID: 1130416547834230973, guid: f75c29f4c01cd1d4faed561115838136,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -53.18
+      value: -50.63
       objectReference: {fileID: 0}
     - target: {fileID: 1130416547834230973, guid: f75c29f4c01cd1d4faed561115838136,
         type: 3}
@@ -1239,7 +1243,7 @@ PrefabInstance:
     - target: {fileID: 1130416547834230973, guid: f75c29f4c01cd1d4faed561115838136,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 15.37
+      value: 10.8
       objectReference: {fileID: 0}
     - target: {fileID: 1130416547834230973, guid: f75c29f4c01cd1d4faed561115838136,
         type: 3}

@@ -11,6 +11,7 @@ public class StartGame : MonoBehaviour {
     public Button quitGame;
     public string startGameScene;
     public string continueGameScene;
+    private string sceneToLoad;
     void Start () {
         bool hasSaved = ES3.KeyExists ("LDJam48_HasSaved");
         if (hasSaved && startGameButton != null && restartGame != null) {
@@ -19,9 +20,9 @@ public class StartGame : MonoBehaviour {
         }
         if (startGameButton != null) {
             if (hasSaved) {
-                startGameButton.onClick.AddListener (() => SceneManager.LoadScene (continueGameScene));
+                startGameButton.onClick.AddListener (() => LoadScene (startGameScene));
             } else {
-                startGameButton.onClick.AddListener (() => SceneManager.LoadScene (startGameScene));
+                startGameButton.onClick.AddListener (() => LoadScene (continueGameScene));
             }
 
         };
@@ -39,6 +40,14 @@ public class StartGame : MonoBehaviour {
         SceneManager.LoadScene (startGameScene);
     }
 
+    void LoadScene (string scene) {
+        Doozy.Engine.GameEventMessage.SendEvent ("HideScene");
+        sceneToLoad = scene;
+        Invoke ("LateLoadScene", 0.5f);
+    }
+    void LateLoadScene () {
+        SceneManager.LoadScene (sceneToLoad);
+    }
     void QuitGame () {
         Application.Quit ();
     }

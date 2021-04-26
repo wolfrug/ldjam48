@@ -30,7 +30,7 @@ Choose your level
 + [{UseButton("Level2")} Storage]
 ->GoToLevel2
 - else:
-+ [{DisableButton()}{UseButton("Level2")} Storage]
++ [{DisableButton()}{UseButton("Level2")} Systems]
 ->CloseElevator
 }
 {accessLevels?Level3 && currentLevel !=Level3:

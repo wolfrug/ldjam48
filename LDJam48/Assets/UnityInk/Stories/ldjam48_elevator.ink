@@ -62,13 +62,12 @@ Choose your level
 ->CloseElevator
 }
 
-
-
 + [Nevermind.]
 ->CloseElevator
 
 =CloseElevator
 #closeelevator
+#autoContinue
 <b></b>
 ->DONE
 

@@ -237,7 +237,7 @@ RectTransform:
   m_Children:
   - {fileID: 367520660}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -308,7 +308,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &107150333
 GameObject:
@@ -373,7 +373,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 107150335}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 203009946}
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+        m_MethodName: PlaySFX
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: ClickButton
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &107150335
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2724,6 +2736,108 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 54}
   m_SizeDelta: {x: 248.8463, y: 56.25}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &203009945
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 203009948}
+  - component: {fileID: 203009946}
+  - component: {fileID: 203009947}
+  m_Layer: 0
+  m_Name: AudioManager (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &203009946
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 203009945}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d96ee4c36344f87448deacfdda2451cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sfxEmitter: {fileID: 203009947}
+  musicEmitter: {fileID: 203009947}
+  eventRefs:
+  - id: ClickButton
+    fmodEvent: event:/UI/UI_Button_Click
+  - id: Footstep
+    fmodEvent: event:/SFX/SFX_Footstep
+  - id: DoorOpen
+    fmodEvent: event:/SFX/SFX_Elevator_Open
+  - id: DoorClose
+    fmodEvent: event:/SFX/SFX_Elevator_Close
+  - id: TuneRadio
+    fmodEvent: event:/SFX/SFX_Radio_Tune
+  - id: Elevator
+    fmodEvent: event:/SFX/SFX_Elevator_Inside
+  - id: Ambience
+    fmodEvent: event:/Ambience/AMB_Silo_BG
+  - id: Breathing
+    fmodEvent: event:/SFX/SFX_Stevie_Breathing
+  - id: ButtonYes
+    fmodEvent: event:/SFX/SFX_Elevator_yes
+  - id: ButtonNo
+    fmodEvent: event:/SFX/SFX_Elevator_no
+  - id: MaxVoice1
+    fmodEvent: event:/SFX/SFX_Max_Voice-01
+  - id: MaxVoice2
+    fmodEvent: event:/SFX/SFX_Max_Voice-02
+  - id: MaxVoice3
+    fmodEvent: event:/SFX/SFX_Max_Voice-03
+  - id: MaxVoice4
+    fmodEvent: event:/SFX/SFX_Max_Voice-04
+  - id: MaxVoice5
+    fmodEvent: event:/SFX/SFX_Max_Voice-05
+--- !u!114 &203009947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 203009945}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  Event: event:/SFX/SFX_Radio_Tune
+  PlayEvent: 1
+  StopEvent: 2
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 1
+  Params:
+  - Name: Tuning
+    Value: 0.384
+  OverrideAttenuation: 0
+  OverrideMinDistance: 0
+  OverrideMaxDistance: 0
+--- !u!4 &203009948
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 203009945}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1028.8198, y: 685.91595, z: -36.20121}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &328782891
 GameObject:
   m_ObjectHideFlags: 0
@@ -2772,7 +2886,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &367520659
 GameObject:
@@ -4423,7 +4537,7 @@ Transform:
   - {fileID: 653387504}
   - {fileID: 601681716}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &953513015
 GameObject:
@@ -6973,7 +7087,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1094387947}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 203009946}
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+        m_MethodName: PlaySFX
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: ClickButton
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1345160081
 GameObject:
   m_ObjectHideFlags: 0
@@ -7061,7 +7187,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1381387893
 GameObject:
@@ -7244,7 +7370,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1728396023
 GameObject:
@@ -7359,7 +7485,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -9741,7 +9867,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1737605360}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 203009946}
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+        m_MethodName: PlaySFX
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: ClickButton
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1737605360
 MonoBehaviour:
   m_ObjectHideFlags: 0

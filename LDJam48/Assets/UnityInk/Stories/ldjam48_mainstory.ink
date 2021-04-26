@@ -1,23 +1,27 @@
 INCLUDE ldjam48_functions.ink
 INCLUDE ldjam48_journal.ink
+INCLUDE ldjam48_elevator.ink
+INCLUDE ldjam48_levels.ink
+INCLUDE ldjam48_puzzles.ink
+INCLUDE ldjam48_radiotalks.ink
 
 // Default main story object - always have a stitch named ==start
 
 {debug:
-->start
+->RadioLevel1.Talk
 }
 
 ==start
 
-{Max} Hello? Did you make it *skrr* … *skrrr* okay?
+{Max} Hello? Did you make it *skrr* … *skrrr* okay? {VoiceClip("MaxVoice1")}
 
 {Stevie} Max? You’re breaking up.
 
-{Max} *skrr* reception is shot *whine skrr* storm coming…
+{Max} *skrr* reception is shot *whine skrr* storm coming… {VoiceClip("MaxVoice2")}
 
 {Stevie} Figures.
 
-{Max} *skrrrr*
+{Max} *skrrrr* {VoiceClip("MaxVoice3")}
 
 {Stevie} All right. I need to find a spot with better reception.
 
@@ -32,36 +36,21 @@ INCLUDE ldjam48_journal.ink
 
 ==TryRadio
 {tunerID:
--"MaxTalk1":
-->MaxTalk.Talk1
+-"RadioLevel0":
+->RadioLevel0.Talk
+-"RadioLevel1":
+->RadioLevel1.Talk
+-"RadioLevel2":
+->RadioLevel2.Talk
+-"RadioLevel3":
+->RadioLevel3.Talk
+-"RadioLevel4":
+->RadioLevel4.Talk
+-"RadioLevel5":
+->RadioLevel5.Talk
+-"RadioLevel6":
+->RadioLevel6.Talk
 - else:
 {Stevie} Ugh. No reception. Typical.
 }
-->finishRadio
-
-==MaxTalk
-
-=Talk1
-{Stevie} Max? Do you copy?
-
-{Max} Stevie, finally! What’s up with the signal done there?
-
-{Stevie} Eh, who knows. 
-
-{Stevie} These old research stations are built like tanks, it’s probably just interference from the hull.
-
-{Max} Pre-war engineering at it’s finest.
-
-{Stevie} You can say that again.
-
-{Max} Well whatever you do, do it fast. Looks like a storm is browning, and you know how those get this close to the Rift.
-
-{Stevie} Just need to find a console to reboot the system, and then we’re out of here.
-
-{Max} Alright partner, there should be an access point on the second floor. 
-
-{Max} Try the elevator, and if you need anything I’m just a whisper away. Max out!
-
-{Stevie} Heh, idiot. 
-
 ->finishRadio

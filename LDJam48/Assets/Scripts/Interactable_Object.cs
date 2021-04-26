@@ -57,6 +57,9 @@ public class Interactable_Object : MonoBehaviour {
         if (hasContextMenu) {
             GenericContextMenu.GetMenuOfType (ContextMenuType.WORLD).selectedOptionEvent.AddListener (ContextMenuAction);
         }
+        if (targetRenderer != null) {
+            targetRenderer.enabled = false;
+        }
     }
 
     public void SetChosenInteraction (Interactions choice) {
@@ -69,6 +72,9 @@ public class Interactable_Object : MonoBehaviour {
         if (normal_selected_materials.Length > 0 && targetRenderer != null) {
             targetRenderer.material = normal_selected_materials[1];
         };
+        if (targetRenderer != null) {
+            targetRenderer.enabled = true;
+        }
         /*if (leftClickContextMenu && GameManager.instance.GameState == GameStates.GAME) {
             GameManager.instance.StopPlayerClickToMove (true);
         }*/
@@ -77,19 +83,22 @@ public class Interactable_Object : MonoBehaviour {
         if (normal_selected_materials.Length > 0 && targetRenderer != null) {
             targetRenderer.material = normal_selected_materials[0];
         };
+        if (targetRenderer != null) {
+            targetRenderer.enabled = false;
+        }
         /*if (leftClickContextMenu && GameManager.instance.GameState == GameStates.GAME) {
             GameManager.instance.StopPlayerClickToMove (false);
         }*/
     }
 
     public void RightClickOn (GenericClickable clickable) {
-        if (hasContextMenu && !leftClickContextMenu) {
+        if (hasContextMenu && !leftClickContextMenu && GameManager.instance.GameState == GameStates.GAME) {
             GenericContextMenu.GetMenuOfType (ContextMenuType.WORLD).PopulateDropDownDefaults (ConvertInteractionsToContextMenuEntries (), gameObject);
             //GameManager.instance.StopPlayerMovement (true);
         };
     }
     public void LeftClickOn (GenericClickable clickable) {
-        if (hasContextMenu && leftClickContextMenu) {
+        if (hasContextMenu && leftClickContextMenu && GameManager.instance.GameState == GameStates.GAME) {
             GenericContextMenu.GetMenuOfType (ContextMenuType.WORLD).PopulateDropDownDefaults (ConvertInteractionsToContextMenuEntries (), gameObject);
             //GameManager.instance.StopPlayerMovement (true);
         };
@@ -243,7 +252,7 @@ public class Interactable_Object : MonoBehaviour {
                         }
                     case Interactions.LOOK_AT:
                         {
-                            if (inspectKnotName != "") {
+                            if (inspectKnotName != "" && GameManager.instance.GameState != GameStates.NARRATIVE) {
                                 InkWriter.main.GoToKnot (inspectKnotName);
                             }
                             break;

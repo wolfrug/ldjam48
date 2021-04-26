@@ -324,7 +324,7 @@ public class InkWriter : MonoBehaviour {
     }
     // When we click the choice button, tell the story to choose that choice!
     public void OnClickChoiceButton (Choice choice, Button button) {
-        if (GameManager.instance.GameState == GameStates.NARRATIVE) {
+        if (GameManager.instance.GameState == GameStates.NARRATIVE || GameManager.instance.GameState == GameStates.WIN) {
             lastText = "";
             InkWriter.main.story.ChooseChoiceIndex (choice.index);
             pickedButton = button;
@@ -333,7 +333,7 @@ public class InkWriter : MonoBehaviour {
         };
     }
     void OnClickContinueButton () {
-        if (GameManager.instance.GameState == GameStates.NARRATIVE) {
+        if (GameManager.instance.GameState == GameStates.NARRATIVE || GameManager.instance.GameState == GameStates.WIN) {
             continueStory = true;
         };
     }

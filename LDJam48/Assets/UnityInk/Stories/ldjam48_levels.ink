@@ -171,7 +171,19 @@
 {Stevie} It's creaking mightily...
 }
 ->endInspect
+
+=Item23 // lootable
+{Stevie} An old locker. Might have something useful in it.
+->endInspect
 /// THIS IS THE TEMPLATE END
+
+=Item24 //the wall
+{Item24<2:
+{Stevie} Looks like it's mainly mechanical. A breaker switch maybe.
+- else:
+{Stevie} Still a breaker switch.
+}
+->endInspect
 
 
 /*==InspectLevel1

@@ -117,7 +117,7 @@ public class GameManager : MonoBehaviour {
     public void WinGame () {
         GameState = GameStates.WIN;
         Debug.Log ("Victory!!");
-        SceneManager.LoadScene ("WinScene");
+        SceneManager.LoadScene ("EndScene");
     }
     public void Defeat () {
 
@@ -331,6 +331,13 @@ public class GameManager : MonoBehaviour {
     public void PlayVoiceOver (object[] inputVariables) {
         string id = inputVariables[0] as string;
         AudioManager.instance.PlaySFX (id);
+    }
+    public void GoToLevel0 () {
+        SetState (GameStates.WIN);
+    }
+    public void Death () {
+        InkWriter.main.story.variablesState["died"] = true;
+        GoToLevel0 ();
     }
 
 }

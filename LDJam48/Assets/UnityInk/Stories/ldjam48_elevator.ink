@@ -1,7 +1,18 @@
 // ELEVATOR CONTROLS
 
-LIST accessLevels = (Level0), (Level1), (Level2), (Level3), (Level4), (Level5), (Level6)
+LIST accessLevels = Level0, (Level1), Level2, Level3, Level4, Level5, Level6
 VAR currentLevel = Level1
+
+==CheatElevator==
+Adding all the levels!
+{AddElevatorLevel(Level0)}
+{AddElevatorLevel(Level1)}
+{AddElevatorLevel(Level2)}
+{AddElevatorLevel(Level3)}
+{AddElevatorLevel(Level4)}
+{AddElevatorLevel(Level5)}
+{AddElevatorLevel(Level6)}
+->->
 
 ==function AddElevatorLevel(level)==
 // Add a new level to access!
@@ -10,7 +21,7 @@ VAR currentLevel = Level1
 ==OpenElevator
 #autoContinue
 #openelevator
-Choose your level
+{UseText("ObjectiveList")}To do:<br>-Stuff.<br>-And things.
 #autoContinue
 {accessLevels?Level0 && currentLevel !=Level0:
 + [{UseButton("Level0")} Exit Hatch]
@@ -61,7 +72,8 @@ Choose your level
 + [{DisableButton()}{UseButton("Level6")} Moonpool]
 ->CloseElevator
 }
-
++ [(Cheat) Add all levels.]
+->CheatElevator->OpenElevator
 + [Nevermind.]
 ->CloseElevator
 
@@ -76,11 +88,14 @@ Choose your level
 ->CloseElevator
 =GoToLevel1
 ~currentLevel = Level1
+{Stevie} Back again. Gotta love the sunlight.
 ->CloseElevator
 =GoToLevel2
+{Stevie} I really don’t know why they restrict access to this level. It’s just more of the same.
 ~currentLevel = Level2
 ->CloseElevator
 =GoToLevel3
+{Stevie} And the first super secret forbidden-by-the-employment-contract level is...an office. Underwhelming. I wanted mutant Mermen, and now nothing less will do.
 ~currentLevel = Level3
 ->CloseElevator
 =GoToLevel4

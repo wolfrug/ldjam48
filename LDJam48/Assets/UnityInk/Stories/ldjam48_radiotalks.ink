@@ -18,69 +18,146 @@
 ->finishRadio
 =Talk
 {Talk<2:
+
 {Max} Stevie? Do you copy?
 
 {Stevie} There you are!
 
 {Stevie} Finally!
 
-{Max} What’s up with the signal down there?
+{Max} Everything okay down there? I could barely hear you earlier.
 
-{Stevie} It’s probably just interference, the station hull is pretty thick.
+{Stevie} Yeah I’m fine, the signal just crapped out. I had to wander around for a bit to find a good reception.
 
-{Max} These old research stations are built like tanks, military engineering at its finest.
+{Max} Make sense. These old research stations are built like tanks. The hull is pretty thick, so that’s probably our culprit. 
 
-{Stevie} You can say that again.
+{Stevie} Probably right, I’ll try not to wander too far.
 
-{Stevie} Alright, I just need to find a console to reboot the system, and then we’re out of here.
+{Stevie} So remind me...what am I looking for down here.
 
-{Max} If there’s nothing nearby, use the elevator and try the second floor. If you need anything I’m just a whisper away. Max out!
+{Max} We need to establish direct access to the Station mainframe. There should be a console in the back somewhere. Take a look.
+
+{Max} If that’s a bust though, we’ll have to use the elevator and try the second floor.
+
+{Max} And if you need anything, I’m just a call away. Max out!
 
 {Stevie} Hey, we agreed! No more stupid sign-off phrases.
 
-{Stevie} Such a child...
+{Max} I can’t hear youuuuuu.
 
-{Stevie} Maybe I should take a quick look around first, there might be something useful. You never know with these old places.
+{Stevie} Such a child.
 
 -else:
-{Talk<3:
-{Stevie} Er...Max?
-
-{Max} Yeah?
-
-{Stevie} What am I looking for again?
-
-{Max} What are you…? You mean, the...elevator for accessing level 2. 
-
-{Stevie} Yeah, that. 
-
-{Stevie} Thanks!
-
-{Max} Are you okay there, Stevie? Suit pressure levels stable? Feeling lightheaded?
-
-{Stevie} Oh, shut up.
-
-{Max} *distorted laughter*
-- else:
-{Stevie} Max, I hate to ask again but...
-
-{Max} Stevie, c’mon. Maybe you really <i>should</i> check your pressure levels. Just go to level 2, already." 
-<color=green>[Click the icon next to where you started to enter the elevator, and then select level 2.]</color>
+{InteractableLevel1.Complete1:
+->InteractableLevel1.Interact2
 }
 }
+{Stevie} What was I doing again?
+
+{InteractableLevel1.Complete1 && InteractableLevel1.Complete2 && not InteractableLevel2.CompleteAll:
+{Max} Going down to level two to get me plugged in?
+
+{Stevie} Right! On it.
+}
+{accessLevels?Level0:
+{Max} Coming back topside? Come on, Stevie.
+}
+
 ->finishRadio
 
 ==RadioLevel2
 {Max} Hmm...
 ->finishRadio
 =Talk
-{Talk<2:
-{Voice} Hey Stevie again.
-{Stevie} Wooow again.
-- else:
-{Voice} Still here.
-{Stevie} Neat. Cool.
+{Talk>1:
+{Stevie} Hello?
+
+{Max} What?
+
+{Stevie} Oh. Nothing...
+
+{not InteractableLevel2.Complete1 && not InteractableLevel2.Complete2:
+{Max} Forgot what you were supposed to do? Find me that computer, Stevie.
+
+{Stevie} On it.
+->finishRadio
 }
+{not InteractableLevel2.Complete2:
+{Max} The breaker, Stevie.
+
+{Stevie} On it.
+->finishRadio
+}
+{InteractableLevel2.Complete1 && InteractableLevel2.Complete2:
+{Max} There's no voice, Stevie. Just come up.
+
+{Stevie} ...
+}
+->finishRadio
+}
+
+{Voice}  *skrr* … *skrrr* … <i>Hello?</i>
+
+{Stevie} What...
+
+{Stevie} Gah, stupid radio is fritzing again. Max! Can you hear me?
+
+{Voice} I *skrrrr*... you *skr*.
+
+{Voice} Please... *skrrr*... help.
+
+{Stevie} Max, this isn’t funny...
+
+{Voice} We’re still down here ....*skrrrr* … Come and find us. <zzt>
+
+{Stevie} What the…
+
+{Stevie} Uhhh, Max? Max, come in.
+
+{Max} *static* What’s that, Stevie? Stupid *skrr* signal.
+
+{Max} Did you say you needed help with something?
+
+{Stevie} No. Not me.
+
+{Stevie} Someone else. Someone...lower down.
+
+{Max} What? No. No way! There’s no one down there, hasn’t been for years.
+
+{Stevie} And yet we both heard it!
+
+{Max} No, I don’t know <i>what</i> I heard. Look just come back up, the system is going through a diagnostic. There’s nothing more we can do.
+
+{Max} I was probably just a phantom recording, an old beacon from the war. 
+
+{Stevie} I guess... 
+
+{Stevie} But it sounded so real. She ...sounded so real.
+
+{Stevie} Shouldn’t we check though, just in case?
+
+{Max} I don't think...
+
+{Stevie} That level access head office granted, how far does it go?
+
+{Max} Just down to 2.
+
+{InteractableLevel2.Complete1:
+
+{Stevie} But you’re in the system now. You can open up the others, can’t you?
+
+{Max} Not a chance. Besides, they locked these places up for a reason.
+
+}
+
+{Max} Let's finish what we came here to do. It's not like we can even go further down right now anyway.
+
+{Max} We can talk more afterwards.
+
+{Stevie} Fine. Flipping a switch then?
+
+{Max} Like always.
+
 ->finishRadio
 
 ==RadioLevel3

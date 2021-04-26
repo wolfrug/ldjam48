@@ -3,6 +3,8 @@
 VAR debug = true
 VAR sayStarted = false
 
+VAR died = false
+
 VAR checkItem = -1
 
 LIST characters = Sadie, George, Ashley, Peter, Egroeg

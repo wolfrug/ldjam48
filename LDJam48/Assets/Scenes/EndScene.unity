@@ -8093,7 +8093,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: b82e1a5c136b53c4fa3d6045791a5106, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 477be5ccc28661748aaf9dd828f7d452, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -8904,6 +8904,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sfxEmitter: {fileID: 2147364002}
   musicEmitter: {fileID: 2147364002}
+  singleton: 0
   eventRefs:
   - id: ClickButton
     fmodEvent: event:/UI/UI_Button_Click
@@ -8948,15 +8949,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CollisionTag: 
-  Event: event:/SFX/SFX_Radio_Tune
+  Event: event:/Ambience/AMB_MainMenu_water
   PlayEvent: 1
   StopEvent: 2
   AllowFadeout: 1
   TriggerOnce: 0
   Preload: 1
-  Params:
-  - Name: Tuning
-    Value: 0.384
+  Params: []
   OverrideAttenuation: 0
   OverrideMinDistance: 0
   OverrideMaxDistance: 0

@@ -9,7 +9,7 @@ INCLUDE ldjam48_lootables.ink
 // Default main story object - always have a stitch named ==start
 
 {debug:
-->RadioLevel1.Talk
+->debugPuzzles
 }
 
 ==start

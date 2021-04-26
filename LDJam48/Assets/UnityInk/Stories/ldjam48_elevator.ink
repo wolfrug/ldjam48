@@ -2,9 +2,9 @@
 
 LIST accessLevels = Level0, (Level1), Level2, Level3, Level4, Level5, Level6
 VAR currentLevel = Level1
+VAR elevatorBlocked = false
 
-==CheatElevator==
-Adding all the levels!
+==AddAllElevator==
 {AddElevatorLevel(Level0)}
 {AddElevatorLevel(Level1)}
 {AddElevatorLevel(Level2)}
@@ -38,7 +38,7 @@ Adding all the levels!
 ->CloseElevator
 }
 {accessLevels?Level2 && currentLevel !=Level2:
-+ [{UseButton("Level2")} Storage]
++ [{UseButton("Level2")} Systems]
 ->GoToLevel2
 - else:
 + [{DisableButton()}{UseButton("Level2")} Systems]
@@ -73,7 +73,17 @@ Adding all the levels!
 ->CloseElevator
 }
 + [(Cheat) Add all levels.]
-->CheatElevator->OpenElevator
+->AddAllElevator->OpenElevator
+* {elevatorBlocked && CheckItem(item_crowbar, 1)} [Pry open door]
+{Stevie} Here goes nothing...
+
+{Stevie} Hnngn...
+
+{Stevie} Nice. Only to go now is down...
+{AddElevatorLevel(Level5)}
+{AddElevatorLevel(Level6)}
+->OpenElevator
+//->AddAllElevator->OpenElevator
 + [Nevermind.]
 ->CloseElevator
 
@@ -99,11 +109,26 @@ Adding all the levels!
 ~currentLevel = Level3
 ->CloseElevator
 =GoToLevel4
+{Stevie} Woah! This place is <i>definitely</i> as science experiment gone wrong. Thank goodness my oxygen is coming out of a tank because I wouldn’t want to breathe the air down here.
 ~currentLevel = Level4
 ->CloseElevator
 =GoToLevel5
+{GoToLevel5<2:
+{Stevie}Oh....not good. Not good at all.
+
+{Stevie} Shit. Door's jammed. Great.
+
+{Stevie} I am not getting out of this...creepy place...unless I can pry these doors open.
+~accessLevels = ()
+~elevatorBlocked = true
+- else:
+
+{Stevie} Emergency lighting, that’s not a good sign. And somehow the mushrooms down here are even larger than the previous floor. Life prevails! Yay?
+}
 ~currentLevel = Level5
 ->CloseElevator
 =GoToLevel6
+{Stevie} Well, this is it. The final level. Let’s go get some answers.
+//->AddAllElevator->
 ~currentLevel = Level6
 ->CloseElevator

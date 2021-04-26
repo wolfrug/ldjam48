@@ -2768,6 +2768,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sfxEmitter: {fileID: 203009947}
   musicEmitter: {fileID: 203009947}
+  singleton: 0
   eventRefs:
   - id: ClickButton
     fmodEvent: event:/UI/UI_Button_Click
@@ -2812,15 +2813,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CollisionTag: 
-  Event: event:/SFX/SFX_Radio_Tune
+  Event: event:/Ambience/AMB_MainMenu_water
   PlayEvent: 1
-  StopEvent: 2
+  StopEvent: 12
   AllowFadeout: 1
   TriggerOnce: 0
   Preload: 1
-  Params:
-  - Name: Tuning
-    Value: 0.384
+  Params: []
   OverrideAttenuation: 0
   OverrideMinDistance: 0
   OverrideMaxDistance: 0
@@ -4446,10 +4445,10 @@ RectTransform:
   m_Father: {fileID: 367520660}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.5}
-  m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 452.53983, y: -229}
-  m_SizeDelta: {x: 1024, y: 1024}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 512.5, y: -229}
+  m_SizeDelta: {x: 1025, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &838592719
 MonoBehaviour:

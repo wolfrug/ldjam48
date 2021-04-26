@@ -9,7 +9,7 @@ VAR checkItem = -1
 
 LIST characters = Sadie, George, Ashley, Peter, Egroeg
 
-LIST items = item_battery, item_keycard, item_walkietalkie, item_crowbar, item_smalloxygen, item_knife, item_tape, item_note, item_diode, item_none
+LIST items = item_battery, item_keycard, item_walkietalkie, item_crowbar, item_smalloxygen, item_knife, item_tape, item_note, item_diode, item_wrench, item_key, item_usb, item_none
 
 VAR debugInventory = item_walkietalkie
 
@@ -74,6 +74,12 @@ EXTERNAL VoiceClip(x)
 ~returnVar = "item_note"
 - item_diode:
 ~returnVar = "item_diode"
+- item_wrench:
+~returnVar = "item_wrench"
+- item_key:
+~returnVar = "item_key"
+- item_usb:
+~returnVar = "item_usb"
 }
 // and return
 ~return returnVar
@@ -99,6 +105,12 @@ EXTERNAL VoiceClip(x)
 ~returnVar = item_note
 - "item_diode":
 ~returnVar = item_diode
+- "item_wrench":
+~returnVar = item_wrench
+- "item_key":
+~returnVar = item_key
+- "item_usb":
+~returnVar = item_usb
 }
 // and return
 ~return returnVar

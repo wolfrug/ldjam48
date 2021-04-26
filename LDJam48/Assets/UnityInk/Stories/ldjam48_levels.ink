@@ -175,13 +175,24 @@
 =Item23 // lootable
 {Stevie} An old locker. Might have something useful in it.
 ->endInspect
-/// THIS IS THE TEMPLATE END
 
-=Item24 //the wall
+=Item24 //the breaker switch
 {Item24<2:
 {Stevie} Looks like it's mainly mechanical. A breaker switch maybe.
 - else:
 {Stevie} Still a breaker switch.
+}
+->endInspect
+
+=Item25 // lootable
+{Stevie} Messy. Looks like they left in a hurry.
+->endInspect
+
+=Item26 //the corpse
+{Item26<2:
+{Stevie} Oh no...
+- else:
+{Stevie} Poor guy.
 }
 ->endInspect
 

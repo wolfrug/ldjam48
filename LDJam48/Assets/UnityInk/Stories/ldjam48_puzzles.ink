@@ -6,6 +6,14 @@ Debug which puzzle?
 ->InteractableLevel1.Interact1
 + [Level0Interactable 2]
 ->InteractableLevel1.Interact2
++ [Level4Interactable 1]
+->InteractableLevel4.Interact1
++ [Level4Interactable 2]
+->InteractableLevel4.Interact2
++ [Level4Interactable 3]
+->InteractableLevel4.Interact3
++ [Level4Interactable 4]
+->InteractableLevel4.Interact4
 
 
 ==stopInteract
@@ -311,5 +319,305 @@ Debug which puzzle?
 - else:
 {Stevie} Usually the breakers are on the other side of the level.
 }
+}
+->stopInteract
+
+===InteractableLevel3
+->stopInteract
+=Interact1
+{Interact1>2:
+{CheckItem(item_keycard, 1):
+{Stevie} Well would you look at that.
+
+{Max} You found the keycard?
+
+{Stevie} Yep, I have full access to the lower floors now.
+
+{Stevie} I’ll still need to unlock them by going down one at a time, but the way seems clear.
+
+{Max} Well just look at you, cracking security systems all by your lonesome. You’re the pilot, the technician, and now the programmer as well.
+
+{Max} I feel superfluous.
+
+{Max} Soon you won’t need me at all!
+
+{Stevie} You big loon, of course you’re useful. You make the best pancakes. I wouldn’t get rid of a pancake maker of your calibre on some mere whim.
+
+{Stevie} Anyway let’s not get too excited. I literally just pushed a card into a reader, big whoop.
+->Complete1
+- else:
+{Stevie} Guh. Guessing passwords isn't going to work. I'll need a keycard.
+->stopInteract
+}
+}
+
+{CheckItem(item_keycard, 1):
+{Stevie} Well would you look at that.
+
+{Max} You found the computer?
+
+{Stevie} Yep, and thanks to a little keycard I found over yonder, I have full access to the lower floors.
+
+{Stevie} I’ll still need to unlock them by going down one at a time, but the way seems clear.
+
+{Max} Well just look at you, cracking security systems all by your lonesome. You’re the pilot, the technician, and now the programmer as well.
+
+{Max} I feel superfluous.
+
+{Max} Soon you won’t need me at all!
+
+{Stevie} You big loon, of course you’re useful. You make the best pancakes. I wouldn’t get rid of a pancake maker of your calibre on some mere whim.
+
+{Stevie} Anyway let’s not get too excited. I literally just pushed a card into a reader, big whoop.
+->Complete1
+-else:
+
+{Stevie} Well the good news is I found a computer.
+
+{Max} And the bad news?
+
+{Stevie} It wants a keycard of some kind. Don’t suppose they left one of those lying around.
+
+{Max} Well, it’s worth a look. Rummage around, you might get lucky.
+->stopInteract
+}
+->stopInteract
+=Complete1
+{Consume(item_keycard, 1)}
+{Stevie} ...All right. The elevator to level 4 should be open now.
+{AddElevatorLevel(Level4)}
+->stopInteract
+
+/*
+=Interact2
+{Complete2<1:
+{Stevie} Right.
++ [Fix it.]
+{Stevie} All fixed.
+->Complete2
+- else:
+{Stevie} I already fixed this.
+}
++ [Leave it.]
+{Stevie} Nah, later.
+->stopInteract
+
+=Complete2
+{Stevie} Easy peasy.
+->CompleteAll
+
+=CompleteAll
+{Complete1 && Complete2:
+{Stevie} Solved! On to the next level.
+{AddElevatorLevel(Level1)}
+- else:
+{Stevie} Still stuff to be done.
+}
+->stopInteract
+*/
+
+===InteractableLevel4
+->stopInteract
+=Interact1
+{not RadioLevel4.Talk:
+{Stevie} Hm. I need to find the signal, not look at spigots.
+->stopInteract
+}
+{not Complete1:
+{Stevie} Right. Here goes nothing.
+* [Turn the spigot]
+{Stevie} All right. Something is definitely happening.
+->Complete1
+- else:
+{Stevie} I wish all spigots turned as nicely as you.
+->stopInteract
+}
+=Complete1
+->CompleteAll
+
+=Interact2
+{not RadioLevel4.Talk:
+{Stevie} Hm. I need to find the signal, not look at spigots.
+->stopInteract
+}
+{not Complete2:
+{Stevie} Rusty. But not too rusty yet. I think.
+* [Turn the spigot]
+{Stevie} That definitely turned something on.
+->Complete2
+- else:
+{Stevie} Still open. Still good.
+->stopInteract
+}
+
+=Complete2
+->CompleteAll
+
+=Interact3
+{not RadioLevel4.Talk:
+{Stevie} Hm. I need to find the signal, not look at spigots.
+->stopInteract
+}
+{not Complete3:
+{Stevie} I guess this is the one. Let's see if it turns.
+* [Turn the spigot]
+{Stevie} I hope the machinery can handle it...
+->Complete3
+- else:
+{Stevie} You were a good little spigot.
+->stopInteract
+}
+
+=Complete3
+->CompleteAll
+
+
+=Interact4
+{not RadioLevel4.Talk:
+{Stevie} Hm. I need to find the signal, not look at spigots.
+->stopInteract
+}
+{not Complete4:
+{Stevie} All right, time to do this...
+
++ [Turn the spigot]
+{Stevie} Hngggg!
+
+{Stevie} Nope. Not with my bare hands. Too rusted.
+
+{CheckItem(item_wrench, 1):
+{Stevie} Luckily I don't come unprepared.
+->Complete4
+- else:
+{Stevie} Well shit. I am going to need leverage.
+
+{Stevie} I'm sure there's something. Maybe not in the lab though.
+
+{Stevie} I should look around in the upper levels..
+->stopInteract.
+}
+- else:
+{Stevie} Not even you can withstand the power of leverage.
+->stopInteract
+}
+
+=Complete4
+->CompleteAll
+
+=CompleteAll
+{Complete1 && Complete2 && Complete3 && Complete4:
+{Stevie} Whoa, listen to that...
+
+{Stevie} It's working. And fast, too. Where is it pumping it all?
+
+{Stevie} Right. Just two more levels.
+
+{AddElevatorLevel(Level5)}
+- else:
+~temp doneSpigots = Complete1 + Complete2 + Complete3 + Complete4
+~temp spigotsLeft = 4-doneSpigots
+{Stevie} That's... {print_num(doneSpigots)} down, {print_num(spigotsLeft)} to go...
+}
+->stopInteract
+
+==InteractableLevel5
+->stopInteract
+=Interact1
+{Interact1<2:
+{Stevie} Are you there?
+
+{Voice} I’m here.
+
+{Stevie} I-- I think I see a whale...outside. An actual whale.
+
+{Voice} Hmm, yes, I can see her too. Beautiful, isn’t she.
+
+{Stevie} I’ve never seen one before. Only in books.
+
+{Stevie} I thought they were all gone.
+
+{Voice} So did I, once. The ocean is good at keeping secrets.
+
+{Stevie} This station certainly has enough to go around.
+
+{Voice} Yes, but not for long.
+
+{Stevie} Voice…?
+
+{Voice} Yes, Stevie?
+
+{Stevie} The whale...it's glowing. I can see it’s bones glowing through the skin. Like fire. Like rift-light.
+
+{Voice} Sometimes to survive, you have to change what you are.
+
+{Voice} But don’t worry, Stevie. It doesn’t hurt. Nothing hurts anymore.
+- else:
+{Stevie} It looks almost close enough to touch.
+}
+->stopInteract
+
+=Interact2
+{not CheckItem(item_key, 1):
+{Stevie} I think...I see something in there.
+
+{Stevie} But the damned thing's locked. And too sturdy to bash open.
+
+{RadioLevel5.Talk:
+{Stevie} What did she say?
+
+{Stevie} The coat of the dead man? Great...
+- else:
+{Stevie} Maybe our friendly voice has a suggestion...
+}
+- else:
+{Stevie} Well, here goes nothing. Let's see if it fits...
+
+{Stevie} Annd success!
+#lockerOpened
+{Consume(item_key, 1)}
+<color=green>[You can now loot the locker.]</color>
+{Stevie} Let's see what we've got.
+}
+->stopInteract
+
+=Interact3
+{RadioLevel5.Talk:
+{Stevie} Ugh, well that’s definitely a dead guy. Let me just ...*unngh*... reach into that pocket and, huh.... It’s a note.
+
+{Stevie} "Forgive me. I couldn't leave them alone in the dark."
+
+{Voice} Try the other pocket
+
+{Stevie} Ah! Sorry, you -- you startled me. What does he mean? Who was this?
+
+{Voice} I suppose it’s only polite to introduce you. This is Dr. Alexei Kovachs, Head Scientist of Rift Station no. 2213. 
+
+{Voice} A brilliant man. An ambitious man. And in the end...a merciful man. Perhaps more than he could have imagined.
+
+{Stevie} You worked with him here on the Station? 
+
+{Voice} I suppose you could say I was a part of his work, yes.
+
+{Stevie} But I don’t understand. Why weren’t the two of you evacuated when the Station was shut down? Where you down here all this time, alone? How did you survive? How did--?
+
+{Voice} Hush, child. Those aren’t the questions you should be focussing on.
+
+{Stevie} Then what are the right questions.
+
+{Voice} Soon, I promise. But first, try the other pocket.
+
+{Stevie} ... 
+
+{Stevie} A key? What’s this for?
+
+{Voice} I’m sure you can figure it out.
+
+#foundKeys
+<color=green>[You can now loot the corpse.]</color>
+- else:
+
+{Stevie} Poor guy. He's been dead a while though. Must've floated here peacefully until I...
+
+{Stevie} Anyway...
 }
 ->stopInteract

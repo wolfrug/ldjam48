@@ -164,13 +164,76 @@
 {Max} Hmm...
 ->finishRadio
 =Talk
-{Talk<2:
-{Voice} Hey Stevie again.
-{Stevie} Wooow again.
+{Talk>1:
+
+{Stevie} Hello..?
+
+{Stevie} Nothing.
+
+{Max} But me.
+
+{Stevie} Yeah.
+
+{not InteractableLevel3.Complete1 && InteractableLevel3.Interact1:
+{Max} Any luck finding that keycard yet?
+{CheckItem(item_keycard, 1):
+{Stevie} I have it right here.
+
+{Max} Off to see if it fits then.
 - else:
-{Voice} Still here.
-{Stevie} Neat. Cool.
+{Stevie} Still looking.
+
+{Max} Good luck. Don't let the Rift-monsters bite.
 }
+- else:
+{Max} Getting cold feet? You can always come back topside.
+}
+->finishRadio
+}
+
+{Stevie} Hello? Is anyone there?
+
+{Voice} ...*static*...
+
+{Max} Told you, there’s nothing down here.
+
+{Stevie} Shut up, Max.
+
+{Stevie} Hello…? <i>Am I crazy? Maybe this is crazy, I--
+
+{Voice} *whine skrik* You c…*skrr*... Hello.
+
+{Max} Holy shit.
+
+{Stevie} Hi! Wow, yes, hello there! My name is Stevie, I’m with the Zone 56 maintenance flyers.
+
+{Stevie} Just tell me where you are and I’ll come and get you.
+
+{Voice} *skkrik*... down… *skrr*
+
+{Stevie} Down, on level 4?
+
+{Voice} *schhhrrr* … no….*skrr*... deeper. Follow the sig…*static*.
+
+{Max} Damn, looks like the signal has faded out again.
+
+{Stevie} But you heard her! You saw it, clear as day!
+
+{Max} Yeah...yeah I...I saw it. The signal was live, I could see it on the plane console. But, Stevie.
+
+{Stevie} What?
+
+{Max} It was deep. Like...really deep. We’re already having communication problems. I don’t want to lose you down there.
+
+{Stevie} You won’t lose me. Have I ever let you down before?
+
+{Max} No, but. Be careful would you?
+
+{Stevie} Always.
+
+{Stevie} I’m going to look for a computer terminal, to see if we can jimmy open Level 4.
+
+{Max} Let me know when you’re ready.
 ->finishRadio
 
 ==RadioLevel4
@@ -178,24 +241,77 @@
 ->finishRadio
 =Talk
 {Talk<2:
-{Voice} Hey Stevie again.
-{Stevie} Wooow again.
+{Stevie} All these mushrooms are giving me the creeps.
+
+{Voice} *skrrr* Don’t worry, they are harmless. *skrr*.
+
+{Stevie} Oh shit, hi again! You’re so much clearer than before.
+
+{Voice} Yes…but I don’t know how long it will hold.
+
+{Stevie} True. Where are you?
+
+{Voice} *skrrrrr* I’m.... on the lowest level.
+
+{Stevie} Are you stuck there? Can you find a way up?
+
+{Voice} No ...*skrik*... way up. Only ...*skrr*... down.
+ 
+{Stevie} But if you’re on the last level then there’s nothing else...down. Just the ocean,
+
+{Voice} You’ll see soon enough.
+
+{Stevie} Okay, look I’m coming to you, just hold on.
+
+{Voice} The levels below you are flooded. Use the…*skriii whine*...
+
+{Stevie} Ah shit, the signal is going again. What did you say?
+
+{Voice} Use the….*skrr*... valves. *zzt*
+
+{Stevie} Damn, she’s gone
+
+{Stevie} Anyone there? Voice…? Max…?
 - else:
-{Voice} Still here.
-{Stevie} Neat. Cool.
+{Stevie} Max?
+
+{Stevie} Man, I miss your voice...
 }
 ->finishRadio
 
 ==RadioLevel5
-{Max} Hmm...
 ->finishRadio
 =Talk
-{Talk<2:
-{Voice} Hey Stevie again.
-{Stevie} Wooow again.
+{RadioLevel5<2:
+{Stevie} Is this thing working?
+
+{Stevie} Are you there?
+
+{Voice} It’s working.
+
+{Stevie} Nice to finally hear you - properly I mean.
+
+{Voice} You’re almost here.
+
+{Stevie} Yes, almost. Though I’m still not sure why. You asked for my help in the beginning, but I get the feeling there’s more to this.
+
+{Voice} Isn’t there always… But I didn’t lie, if that’s what is troubling you. I do need your help, very badly.
+
+{Voice} I’ve been holding on for so long now, but it won’t be long now.
+
+{Voice} Come down when you’re ready, and I’ll explain. But first, a favour?
+
+{Stevie} Sure, why not.
+
+{Voice} There is a dead man on the other side of the level you are on. Don’t be alarmed! He’d been dead for a long time now, and there’s nothing to fear. But he has something, in his coat pocket…
+
+{Voice} Bring it to me?
+
+{Stevie} I… I’ll see what I can do.
 - else:
-{Voice} Still here.
-{Stevie} Neat. Cool.
+{Stevie} Hello?
+
+{Stevie} ...too much to ask I guess.
 }
 ->finishRadio
 

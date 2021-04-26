@@ -258,10 +258,10 @@ MonoBehaviour:
     Joe Wright, sprite art,
     backgrounds
 
-    Ashley Doucette, UI art, additional sprites
+    Ashley Doucette, UI art, additional sprites, voices
 
-    George Tas,
-    sound, music'
+    George
+    Tas, sound, music, voices'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9d91d16dbd53a9a4ea579b3e6437084a, type: 2}
   m_sharedMaterial: {fileID: -8716633721033635861, guid: 9d91d16dbd53a9a4ea579b3e6437084a,
